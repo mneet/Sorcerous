@@ -1,56 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using static Perspective;
 
 public class Player : MonoBehaviour {
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private Perspective perspectiveController;
+    [SerializeField] private GameInput gameInput;
 
-    private void TopDownMovement() {
-        Vector3 movVector = new Vector3(0f, 0f, 0f);
+    private bool lockMovement = false;
 
-        movVector.x = Input.GetAxis("Horizontal");
-        movVector.z = Input.GetAxis("Vertical");
-        movVector = movVector.normalized;
+    private void HandleMovement() {
+        Vector2 movVector = gameInput.GetMovementVectorNormalized();
 
-        transform.position += movVector * movementSpeed * Time.deltaTime;
+        Vector3 movDir = new Vector3(0,0,0);
+
+        switch (perspectiveController.perspective) {
+
+            case PerspectiveOptions.topDown:
+                movDir = new Vector3(movVector.x, 0, movVector.y);
+                break;
+
+            case PerspectiveOptions.sideScroler:
+                movDir = new Vector3(movVector.x, movVector.y, 0);
+                break;
+
+            case PerspectiveOptions.thirdPerson:
+                movDir = new Vector3(0, movVector.y, movVector.x * -1);
+                break;
+        }
+
+        transform.position += movDir * movementSpeed * Time.deltaTime;
     }
-    private void SideScrollerMovement() {
-        Vector3 movVector = new Vector3(0f, 0f, 0f);
 
-        movVector.x = Input.GetAxis("Horizontal");
-        movVector.y = Input.GetAxis("Vertical");
-        movVector = movVector.normalized;
-
-        transform.position += movVector * movementSpeed * Time.deltaTime;
-    }
-
-    private void ThirdPersonMovement() {
-        Vector3 movVector = new Vector3(0f, 0f, 0f);
-
-        movVector.z = Input.GetAxis("Horizontal") * -1;
-        movVector.y = Input.GetAxis("Vertical");
-        movVector = movVector.normalized;
-
-        transform.position += movVector * movementSpeed * Time.deltaTime;
+    private void MoveToCenter() {
+        transform.position = Vector3.Lerp(transform.position, new Vector3(0, 0, 0), movementSpeed);
+        if (transform.position != Vector3.zero) {
+            lockMovement = true;
+        }
+        else lockMovement = false;
     }
 
     // Update is called once per frame
     void Update() {
-        switch (perspectiveController.perspective) {
-            case PerspectiveOptions.topDown:
-                TopDownMovement();
-                break;
-
-            case PerspectiveOptions.sideScroler:
-                SideScrollerMovement();
-                break;
-
-            case PerspectiveOptions.thirdPerson:
-                ThirdPersonMovement();
-                break;
-
-        }
+        HandleMovement();
     }
 }
