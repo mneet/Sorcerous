@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CustomBlends:
   - m_From: SideScrollerCam
-    m_To: TopDownCam
+    m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 1
       m_Time: 1
@@ -25,9 +25,20 @@ MonoBehaviour:
         m_PostInfinity: 0
         m_RotationOrder: 0
   - m_From: TopDownCam
-    m_To: SideScrollerCam
+    m_To: '**ANY CAMERA**'
     m_Blend:
       m_Style: 2
+      m_Time: 1
+      m_CustomCurve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+  - m_From: ThirdPersonCam
+    m_To: '**ANY CAMERA**'
+    m_Blend:
+      m_Style: 1
       m_Time: 1
       m_CustomCurve:
         serializedVersion: 2
