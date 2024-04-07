@@ -11,7 +11,6 @@ public class Perspective : MonoBehaviour
         thirdPerson
     }
     public PerspectiveOptions perspective;
-    private PerspectiveOptions activePerspective;
 
     private void Awake() {
         animator = GetComponent<Animator>();
@@ -33,7 +32,6 @@ public class Perspective : MonoBehaviour
                 break;
 
         }
-        activePerspective = perspective;
     }
 
 
@@ -48,6 +46,5 @@ public class Perspective : MonoBehaviour
 
     private void Update() {
         DebugSwitchPerspective();
-        if (activePerspective != perspective) switchState(perspective);
     }
 }
