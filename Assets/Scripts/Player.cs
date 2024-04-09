@@ -9,8 +9,6 @@ public class Player : MonoBehaviour {
     [SerializeField] private Perspective perspectiveController;
     [SerializeField] private GameInput gameInput;
 
-    private bool lockMovement = false;
-
     private void HandleMovement() {
         Vector2 movVector = gameInput.GetMovementVectorNormalized();
 
@@ -30,17 +28,31 @@ public class Player : MonoBehaviour {
                 movDir = new Vector3(0, movVector.y, movVector.x * -1);
                 break;
         }
-
+       
         transform.position += movDir * movementSpeed * Time.deltaTime;
+        MoveToCenter();
     }
 
     private void MoveToCenter() {
-        transform.position = Vector3.Lerp(transform.position, new Vector3(0, 0, 0), movementSpeed);
-        if (transform.position != Vector3.zero) {
-            lockMovement = true;
+        Vector3 movDir = new Vector3(0, 0, 0);
+
+        switch (perspectiveController.perspective) {
+
+            case PerspectiveOptions.topDown:
+                movDir = new Vector3(transform.position.x, 0, transform.position.z);
+                break;
+
+            case PerspectiveOptions.sideScroler:
+                movDir = new Vector3(transform.position.x, transform.position.y, 0);
+                break;
+
+            case PerspectiveOptions.thirdPerson:
+                movDir = new Vector3(0, transform.position.y, transform.position.z);
+                break;
         }
-        else lockMovement = false;
+        transform.position = Vector3.MoveTowards(transform.position, movDir, Time.deltaTime * movementSpeed);
     }
+
 
     // Update is called once per frame
     void Update() {
