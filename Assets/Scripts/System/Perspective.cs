@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,23 @@ public class Perspective : MonoBehaviour
         thirdPerson
     }
     public PerspectiveOptions perspective;
+
+    // Screen Limits
+    public float topDownWidthMin;
+    public float topDownWidthMax;
+    public float topDownHeightMin;
+    public float topDownHeightMax;
+
+    public float sideScrollerWidthMin;
+    public float sideScrollerWidthMax;
+    public float sideScrollerHeightMin;
+    public float sideScrollerHeightMax;
+
+    public float thirdPersonWidthMin;
+    public float thirdPersonWidthMax;
+    public float thirdPersonHeightMin;
+    public float thirdPersonHeightMax;
+
 
     private void Awake() {
         animator = GetComponent<Animator>();
