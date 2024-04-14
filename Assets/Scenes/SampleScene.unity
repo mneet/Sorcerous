@@ -477,7 +477,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.000004
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -503,8 +503,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1287,7 +1287,7 @@ MonoBehaviour:
   - {fileID: 1550174748}
   m_Instructions:
   - m_FullHash: 953781255
-    m_VirtualCamera: {fileID: 1159654480}
+    m_VirtualCamera: {fileID: 1364913962}
     m_ActivateAfter: 0
     m_MinDuration: 0
   - m_FullHash: -644796950
@@ -1351,14 +1351,14 @@ MonoBehaviour:
   topDownWidthMax: 9
   topDownHeightMin: -4.9
   topDownHeightMax: 4.9
-  sideScrollerWidthMin: -6
-  sideScrollerWidthMax: 6
+  sideScrollerWidthMin: -9.1
+  sideScrollerWidthMax: 9.1
   sideScrollerHeightMin: -4.9
   sideScrollerHeightMax: 4.9
-  thirdPersonWidthMin: 0
-  thirdPersonWidthMax: 0
-  thirdPersonHeightMin: -6
-  thirdPersonHeightMax: 3.7
+  thirdPersonWidthMin: -9.1
+  thirdPersonWidthMax: 9.1
+  thirdPersonHeightMin: -4.9
+  thirdPersonHeightMax: 4.9
 --- !u!1 &2075802769
 GameObject:
   m_ObjectHideFlags: 0
