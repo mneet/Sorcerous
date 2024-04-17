@@ -30,11 +30,11 @@ public class MovementComponent : MonoBehaviour
                 break;
 
             case PerspectiveOptions.sideScroler:
-                movDir = new Vector3(movementDirection.x, movementDirection.y, 0);
+                movDir = new Vector3(0, movementDirection.y, movementDirection.x);
                 break;
 
             case PerspectiveOptions.thirdPerson:
-                movDir = new Vector3(0, movementDirection.y, movementDirection.x * -1);
+                movDir = new Vector3(movementDirection.x, movementDirection.y, 0);
                 break;
         }
 

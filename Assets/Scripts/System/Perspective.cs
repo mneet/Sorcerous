@@ -56,7 +56,7 @@ public class Perspective : MonoBehaviour
 
 
     void DebugSwitchPerspective() {
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.F1)) {
             int enumLen = System.Enum.GetValues(typeof(PerspectiveOptions)).Length - 1;
             perspective++;
             if ((int)perspective > enumLen) perspective = 0;
