@@ -8,18 +8,18 @@ public class MovementComponent : MonoBehaviour
 {
     [SerializeField] private float movementSpeed = 10f;
     [SerializeField] private Perspective perspectiveController;
-
-    [SerializeField] private enum MovementDirection {
+    private enum MovementDirection {
         UP,
         DOWN,
         LEFT,
         RIGHT
     }
     [SerializeField] private MovementDirection movementDirectionEnum;
-
     [SerializeField] private Vector2 movementDirection;
 
-
+    public bool fixedPosition = false;
+    public Vector3 targetPosition;
+    
     private void BasicStraightMovement() {
         Vector3 movDir = new Vector3(0, 0, 0);
 
@@ -32,18 +32,25 @@ public class MovementComponent : MonoBehaviour
             case PerspectiveOptions.sideScroler:
                 movDir = new Vector3(0, movementDirection.y, movementDirection.x);
                 break;
-
-            case PerspectiveOptions.thirdPerson:
-                movDir = new Vector3(movementDirection.x, movementDirection.y, 0);
-                break;
         }
 
-        transform.position += movDir * movementSpeed * Time.deltaTime;
+        transform.position -= movDir * movementSpeed * Time.deltaTime;
     }
 
-    // Update is called once per frame
+    private void MoveToFormation() {
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, (movementSpeed * 3) * Time.deltaTime);
+    }
+
+    private void Awake() {
+        perspectiveController = GameObject.Find("StateDrivenCamera").GetComponent<Perspective>();
+    }
     void Update()
     {
-        BasicStraightMovement();
+        if (fixedPosition) {
+            MoveToFormation();
+        }
+        else {
+            BasicStraightMovement();
+        }
     }
 }

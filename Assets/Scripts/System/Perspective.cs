@@ -9,10 +9,10 @@ public class Perspective : MonoBehaviour
     public enum PerspectiveOptions {
         topDown,
         sideScroler,
-        thirdPerson
     }
     public PerspectiveOptions perspective;
     private PerspectiveOptions activePerspective;
+    private PerspectiveOptions lastPerspective;
 
     // Screen Limits
     public float topDownWidthMin;
@@ -25,17 +25,12 @@ public class Perspective : MonoBehaviour
     public float sideScrollerHeightMin;
     public float sideScrollerHeightMax;
 
-    public float thirdPersonWidthMin;
-    public float thirdPersonWidthMax;
-    public float thirdPersonHeightMin;
-    public float thirdPersonHeightMax;
-
 
     private void Awake() {
         animator = GetComponent<Animator>();
     }
 
-    public void switchState(PerspectiveOptions perspective) {
+    private void SwitchState(PerspectiveOptions perspective) {
 
         switch (perspective) {
             case PerspectiveOptions.topDown:
@@ -46,26 +41,39 @@ public class Perspective : MonoBehaviour
                 animator.Play("SideScroller");
                 break;
 
-            case PerspectiveOptions.thirdPerson:
-                animator.Play("ThirdPerson");
-                break;
-
         }
         activePerspective = perspective;
     }
 
+    public void SwitchPerspective(PerspectiveOptions newPerspective) {
+        lastPerspective = perspective;
+        perspective = newPerspective;
+        SwitchState(perspective);
+    }
+    public PerspectiveOptions GetRandomPerspective() {
+        List<PerspectiveOptions> values = new List<PerspectiveOptions>();
+        values.Add(PerspectiveOptions.topDown);
+        values.Add(PerspectiveOptions.sideScroler);
+
+        if (values.Contains(lastPerspective)) {
+            values.Remove(lastPerspective);
+        }
+        PerspectiveOptions randomPerspective = values[Mathf.Max(UnityEngine.Random.Range(0, values.Count - 1), 0)];
+
+        return randomPerspective;
+    }
 
     void DebugSwitchPerspective() {
         if (Input.GetKeyDown(KeyCode.F1)) {
             int enumLen = System.Enum.GetValues(typeof(PerspectiveOptions)).Length - 1;
             perspective++;
             if ((int)perspective > enumLen) perspective = 0;
-            switchState(perspective);
+            SwitchState(perspective);
         }
     }
 
     private void Update() {
         DebugSwitchPerspective();
-        if (activePerspective != perspective) switchState(perspective);
+        if (activePerspective != perspective) SwitchState(perspective);
     }
 }

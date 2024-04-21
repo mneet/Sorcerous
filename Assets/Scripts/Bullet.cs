@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     
 
     private void CheckOutOfScreen() {
-        if (transform.position.x > 20 || transform.position.y > 20 || transform.position.z > 20) {
+        if (transform.position.x > 30 || transform.position.y > 30 || transform.position.z > 30) {
             Destroy(gameObject);
         }
     }

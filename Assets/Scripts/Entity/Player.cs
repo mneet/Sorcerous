@@ -39,10 +39,6 @@ public class Player : MonoBehaviour
             case PerspectiveOptions.sideScroler:
                 movDir = new Vector3(0, movVector.y, movVector.x);
                 break;
-
-            case PerspectiveOptions.thirdPerson:
-                movDir = new Vector3(movVector.x, movVector.y, 0);
-                break;
         }
 
         transform.position += movDir * movementSpeed * Time.deltaTime;
@@ -63,10 +59,6 @@ public class Player : MonoBehaviour
             case PerspectiveOptions.sideScroler:
                 movDir.x = 0;
                 break;
-
-            case PerspectiveOptions.thirdPerson:
-                movDir.z = 0;
-                break;
         }
         transform.position = Vector3.MoveTowards(transform.position, movDir, (movementSpeed * Time.deltaTime));
     }
@@ -83,11 +75,6 @@ public class Player : MonoBehaviour
             case PerspectiveOptions.sideScroler:
                 objectPosition.z = Mathf.Clamp(objectPosition.z, perspectiveController.sideScrollerWidthMin, perspectiveController.sideScrollerWidthMax);
                 objectPosition.y = Mathf.Clamp(objectPosition.y, perspectiveController.sideScrollerHeightMin, perspectiveController.sideScrollerHeightMax);
-                break;
-
-            case PerspectiveOptions.thirdPerson:
-                objectPosition.x = Mathf.Clamp(objectPosition.x, perspectiveController.thirdPersonWidthMin, perspectiveController.thirdPersonWidthMax);
-                objectPosition.y = Mathf.Clamp(objectPosition.y, perspectiveController.thirdPersonHeightMin, perspectiveController.thirdPersonHeightMax);
                 break;
         }
         transform.position = objectPosition;
