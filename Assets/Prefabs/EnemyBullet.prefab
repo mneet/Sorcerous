@@ -50,7 +50,7 @@ MonoBehaviour:
   parentTag: 
   speed: 15
   direction: {x: 0, y: 0, z: 1}
-  damage: 2
+  damage: 1
 --- !u!136 &5871377139139849969
 CapsuleCollider:
   m_ObjectHideFlags: 0
