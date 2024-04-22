@@ -19,8 +19,6 @@ public class PlayerInput : MonoBehaviour
         // Set up input system
         playerInputActions = new PlayerInputActions();
         playerInputActions.Player.Enable();
-
-        playerInputActions.Player.Shoot.performed += ShootInput;
     }
 
     #region Player Movement
@@ -35,12 +33,15 @@ public class PlayerInput : MonoBehaviour
     #endregion
 
     // Shoot when input is pressed
-    public void ShootInput(InputAction.CallbackContext context) {
-        player.ShootBullet();
+    public void ShootInput() {
+        player.GetComponent<ShootComponent>().ShootBullet();
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (playerInputActions.Player.Shoot.IsPressed()) {
+            ShootInput();
+        }
     }
 }

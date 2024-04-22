@@ -242,9 +242,11 @@ public class WaveManager : MonoBehaviour
             MovementComponent movementComponent = mob.GetComponent<MovementComponent>();
             movementComponent.fixedPosition = fixedPosition;
             movementComponent.targetPosition = mobStruct.position;
+            movementComponent.RandomizeMovementDirection();
             list.Add(mob);
 
             mob.GetComponent<Entity>().spawner = gameObject;
+
         }
         return list;
     }

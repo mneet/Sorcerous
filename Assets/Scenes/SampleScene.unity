@@ -344,6 +344,27 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1029625262 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8616154167674338277, guid: 41ceb16dc7a48c943bc000a0640a9a8b, type: 3}
+  m_PrefabInstance: {fileID: 7021030767864254803}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1029625269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029625262}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c89c28f3af8e74aa3f32f1a09d9399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControlled: 1
+  perspectiveController: {fileID: 0}
+  bulletPreFab: {fileID: 3265343305577063921, guid: d1c9ab50bddc5f743bd83ec1459623cd, type: 3}
+  fireRate: 0.5
 --- !u!1 &1938690039
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,8 +422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5af10bd573b2da4a96fe5fd87a252e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPreFab: {fileID: 2711517753622614249, guid: c279f6b47b66d9c41901d70bf6ac6f25, type: 3}
   perspectiveManager: {fileID: 3951301667896993950}
+  enemyPreFab: {fileID: 2711517753622614249, guid: c279f6b47b66d9c41901d70bf6ac6f25, type: 3}
   topDownRight:
     centerAnchorX: 20
     centerAnchorY: 0
@@ -914,6 +935,10 @@ PrefabInstance:
       propertyPath: perspectiveController
       value: 
       objectReference: {fileID: 3951301667896993950}
+    - target: {fileID: 1586050125073082445, guid: 41ceb16dc7a48c943bc000a0640a9a8b, type: 3}
+      propertyPath: immortal
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1933389212899135496, guid: 41ceb16dc7a48c943bc000a0640a9a8b, type: 3}
       propertyPath: m_Constraints
       value: 0
@@ -977,7 +1002,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8616154167674338277, guid: 41ceb16dc7a48c943bc000a0640a9a8b, type: 3}
+      insertIndex: 4
+      addedObject: {fileID: 1029625269}
   m_SourcePrefab: {fileID: 100100000, guid: 41ceb16dc7a48c943bc000a0640a9a8b, type: 3}
 --- !u!1 &7581564073173274151
 GameObject:

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2481830362601354050}
   - component: {fileID: 5871377139139849969}
   m_Layer: 0
-  m_Name: Projectile
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ab11dcf7277a04ba33296b4a94868f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  parentTag: 
   speed: 15
   direction: {x: 0, y: 0, z: 1}
+  damage: 2
 --- !u!136 &5871377139139849969
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -133,7 +136,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e38871d2dc356524b99014b45de2eafa, type: 2}
+  - {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

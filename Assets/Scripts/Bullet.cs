@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public GameObject parent;
+    public string parentTag;
     public float speed = 15.0f;
     public Vector3 direction = Vector3.forward;
     public float damage = 2f;
@@ -18,7 +19,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
 
-        if (other.gameObject != parent) {
+        if (!other.gameObject.CompareTag(parentTag)) {
             HealthComponent health = other.GetComponent<HealthComponent>();
             if (health != null) {
                 health.TakeDamage(damage);

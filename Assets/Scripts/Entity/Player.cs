@@ -84,15 +84,6 @@ public class Player : MonoBehaviour
 
     #endregion
 
-    public void ShootBullet() {
-        Vector3 position = transform.position;
-        Quaternion rotation = transform.rotation;
-
-        GameObject bullet = Instantiate(bulletPreFab, position, rotation);
-        bullet.GetComponent<Bullet>().parent = gameObject;
-
-    }
-
     // Update is called once per frame
     void Update()
     {

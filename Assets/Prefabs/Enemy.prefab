@@ -12,11 +12,12 @@ GameObject:
   - component: {fileID: 471902059142786631}
   - component: {fileID: 7865836733560604033}
   - component: {fileID: 5102776927255064854}
+  - component: {fileID: 5518433118925566907}
   - component: {fileID: 205030223996862514}
   - component: {fileID: 4632824934448205995}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -50,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f16da676b44bb184aa8c8594a61a7de7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isEnemy: 1
   spawner: {fileID: 0}
 --- !u!114 &7865836733560604033
 MonoBehaviour:
@@ -64,6 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 2
+  immortal: 0
 --- !u!114 &5102776927255064854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,12 +79,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c51bf766ddb34bafeb6f4cc0a2132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screenHeight: 25
+  screenWidth: 46
   movementSpeed: 5
   perspectiveController: {fileID: 0}
-  movementDirectionEnum: 0
-  movementDirection: {x: 1, y: 0}
+  movementBehaviour: 0
+  movementDirection: 0
+  movementDirectionVector: {x: 0, y: 0}
+  movementDirectionVector3: {x: 0, y: 0, z: 0}
   fixedPosition: 0
   targetPosition: {x: 0, y: 0, z: 0}
+--- !u!114 &5518433118925566907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711517753622614249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c89c28f3af8e74aa3f32f1a09d9399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControlled: 0
+  perspectiveController: {fileID: 0}
+  bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
+  fireRate: 3
 --- !u!54 &205030223996862514
 Rigidbody:
   m_ObjectHideFlags: 0
