@@ -5,7 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     [SerializeField] private bool isEnemy = true;
-
+    [SerializeField] private GameObject healPwrup;
     public GameObject spawner = null;
     public void DestroySelf() {
         GameObject.Destroy(gameObject);
@@ -13,10 +13,12 @@ public class Entity : MonoBehaviour
         if (spawner != null && isEnemy) {
             spawner.GetComponent<WaveManager>().MobDestroyed(gameObject);
         }
-    }
 
-    void Update()
-    {
-        
+        if (isEnemy) {
+            int dice = Random.Range(0, 100);
+            if (dice > 70) { 
+                Instantiate(healPwrup, transform.position, Quaternion.identity);
+            }
+        }
     }
 }

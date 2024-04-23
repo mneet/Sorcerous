@@ -11,6 +11,8 @@ public class WaveManager : MonoBehaviour
 {
     // System
     [SerializeField] private Perspective perspectiveManager;
+    [SerializeField] private GameManager gameManager;
+
     // Round control variables
     private Round currentRound;
     private bool formationWaveSpawned = false;
@@ -262,6 +264,7 @@ public class WaveManager : MonoBehaviour
     }
     // Call SpawnWave for Formation and Runner Waves
     private void RoundManager() {
+
         if (!formationWaveSpawned && currentRound.formationWaveFlag) {
             formationMobList = SpawnWave(currentRound.formationWaves[currentRound.formationWaveInd], true);
             formationWaveSpawned = true;
@@ -316,9 +319,10 @@ public class WaveManager : MonoBehaviour
         topDownAreas = new List<SpawnArea> { topDownRight, topDownLeft, topDownCenter };
 
         currentRound = RoundGenerator();
+        gameManager = gameObject.GetComponent<GameManager>();
     }
     void Update()
     {
-        RoundManager();
+        if (!gameManager.gameEnded) RoundManager();
     }
 }

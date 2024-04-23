@@ -12,13 +12,17 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(float damage) {
         health -= damage;
 
-
         if (isPlayer) gameManager.UpdateHealthUI((int)health);
      
         if (health <= 0 && !immortal) {
             if (!isPlayer) gameManager.ScorePoint(1);
             gameObject.GetComponent<Entity>().DestroySelf();
         }
+    }
+
+    public void TakeHeal(float heal) {
+        health += heal;
+        if (isPlayer) gameManager.UpdateHealthUI((int)health);
     }
 
     private void Awake() {

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isEnemy: 1
+  healPwrup: {fileID: 3297844915496584656, guid: cf3a2c30eff66d941aa83779c1e251f2, type: 3}
   spawner: {fileID: 0}
 --- !u!114 &7865836733560604033
 MonoBehaviour:
