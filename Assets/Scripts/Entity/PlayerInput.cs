@@ -8,7 +8,6 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     // Game Systems
-    [SerializeField] private Perspective perspectiveController;
     private PlayerInputActions playerInputActions;
     private Player player;
 

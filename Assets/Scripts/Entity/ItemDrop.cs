@@ -7,6 +7,7 @@ public class ItemDrop : MonoBehaviour
     [SerializeField] private bool isEnemy = true;
     [SerializeField] private GameObject healPwrup;
     public GameObject spawner = null;
+
     public void DestroySelf() {
         GameObject.Destroy(gameObject);
 

@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private int score = 0;
 
+    public static GameManager Instance;
+
     public bool gameEnded = false;
 
     private HUDManager hudManager;
@@ -35,5 +37,6 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         hudManager = gameObject.GetComponent<HUDManager>();
+        Instance = this;
     }
 }

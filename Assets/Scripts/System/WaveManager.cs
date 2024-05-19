@@ -10,8 +10,7 @@ using static WaveManager;
 public class WaveManager : MonoBehaviour
 {
     // System
-    [SerializeField] private Perspective perspectiveManager;
-    [SerializeField] private GameManager gameManager;
+    public static WaveManager Instance;
 
     // Round control variables
     private Round currentRound;
@@ -94,7 +93,7 @@ public class WaveManager : MonoBehaviour
     // Generates a new Round
     private Round RoundGenerator() {
         Round newRound = new Round();
-        newRound.perspective = perspectiveManager.GetRandomPerspective();
+        newRound.perspective = Perspective.Instance.GetRandomPerspective();
         newRound.InitVariables();
 
         for (var i = 0; i < 1; i++) {
@@ -256,7 +255,7 @@ public class WaveManager : MonoBehaviour
     private List<GameObject> SpawnWave(Wave wave, bool fixedPosition) {
         List<GameObject> mobList = new List<GameObject>();
         if (!wave.waveSpawned) {
-            perspectiveManager.SwitchPerspective(currentRound.perspective);
+            Perspective.Instance.SwitchPerspective(currentRound.perspective);
             mobList = SpawnMobList(wave.waveMobs, fixedPosition);
             wave.waveSpawned = true;
         }
@@ -315,14 +314,17 @@ public class WaveManager : MonoBehaviour
     #endregion 
 
     private void Awake() {
+        Instance = this;
         sideScrollerAreas = new List<SpawnArea> { sideScrollerTop, sideScrollenCenter, sideScrollerDown };
         topDownAreas = new List<SpawnArea> { topDownRight, topDownLeft, topDownCenter };
-
-        currentRound = RoundGenerator();
-        gameManager = gameObject.GetComponent<GameManager>();
     }
+
+    private void Start() {
+        currentRound = RoundGenerator();
+    }
+
     void Update()
     {
-        if (!gameManager.gameEnded) RoundManager();
+        if (!GameManager.Instance.gameEnded) RoundManager();
     }
 }

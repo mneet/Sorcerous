@@ -12,7 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject bulletPreFab;
 
     // Game Systems
-    [SerializeField] private Perspective perspectiveController;
     [SerializeField] private LayerMask mouseLayer;
     private PlayerInput playerInput;
 
@@ -31,7 +30,7 @@ public class Player : MonoBehaviour
 
         Vector3 movDir = new Vector3(0, 0, 0);
 
-        switch (perspectiveController.perspective) {
+        switch (Perspective.Instance.perspective) {
 
             case PerspectiveOptions.topDown:
                 movDir = new Vector3(movVector.x, 0, movVector.y);
@@ -51,7 +50,7 @@ public class Player : MonoBehaviour
     private void MoveToCenter() {
 
         Vector3 movDir = transform.position;
-        switch (perspectiveController.perspective) {
+        switch (Perspective.Instance.perspective) {
 
             case PerspectiveOptions.topDown:
                 movDir.y = 0;
@@ -67,15 +66,15 @@ public class Player : MonoBehaviour
     // Limit player position inside the window
     private void LimitPlayerMovement() {
         Vector3 objectPosition = transform.position;
-        switch (perspectiveController.perspective) {
+        switch (Perspective.Instance.perspective) {
             case PerspectiveOptions.topDown:
-                objectPosition.x = Mathf.Clamp(objectPosition.x, perspectiveController.topDownWidthMin, perspectiveController.topDownWidthMax);
-                objectPosition.z = Mathf.Clamp(objectPosition.z, perspectiveController.topDownHeightMin, perspectiveController.topDownHeightMax);
+                objectPosition.x = Mathf.Clamp(objectPosition.x, Perspective.Instance.topDownWidthMin, Perspective.Instance.topDownWidthMax);
+                objectPosition.z = Mathf.Clamp(objectPosition.z, Perspective.Instance.topDownHeightMin, Perspective.Instance.topDownHeightMax);
                 break;
 
             case PerspectiveOptions.sideScroler:
-                objectPosition.z = Mathf.Clamp(objectPosition.z, perspectiveController.sideScrollerWidthMin, perspectiveController.sideScrollerWidthMax);
-                objectPosition.y = Mathf.Clamp(objectPosition.y, perspectiveController.sideScrollerHeightMin, perspectiveController.sideScrollerHeightMax);
+                objectPosition.z = Mathf.Clamp(objectPosition.z, Perspective.Instance.sideScrollerWidthMin, Perspective.Instance.sideScrollerWidthMax);
+                objectPosition.y = Mathf.Clamp(objectPosition.y, Perspective.Instance.sideScrollerHeightMin, Perspective.Instance.sideScrollerHeightMax);
                 break;
         }
         transform.position = objectPosition;
@@ -97,7 +96,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (perspectiveController.perspective == PerspectiveOptions.topDown) RotatePlayerMouse();
+        if (Perspective.Instance.perspective == PerspectiveOptions.topDown) RotatePlayerMouse();
         else transform.rotation = Quaternion.identity;
 
         HandleMovement();  

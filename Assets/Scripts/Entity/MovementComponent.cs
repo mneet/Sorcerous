@@ -12,8 +12,7 @@ public class MovementComponent : MonoBehaviour
     [SerializeField] private float screenWidth = 46f;
     
     // Game Systems
-    [SerializeField] private Perspective perspectiveController;
-    private Stats stats;
+     private Stats stats;
 
     public enum MovementBehaviour {
         STRAIGHT,
@@ -94,7 +93,7 @@ public class MovementComponent : MonoBehaviour
     private void ApplyPosition(Vector2 newPosition) {
 
         Vector3 objectPosition = new Vector3();
-        switch (perspectiveController.perspective) {
+        switch (Perspective.Instance.perspective) {
             case PerspectiveOptions.topDown:
                 objectPosition.x = newPosition.x;
                 objectPosition.z = newPosition.y;
@@ -113,7 +112,7 @@ public class MovementComponent : MonoBehaviour
     private void BasicStraightMovement() {
         Vector3 movDir = new Vector3(0, 0, 0);
 
-        switch (perspectiveController.perspective) {
+        switch (Perspective.Instance.perspective) {
 
             case PerspectiveOptions.topDown:
                 movementDirectionVector3 = new Vector3(movementDirectionVector.x, 0, movementDirectionVector.y);
@@ -143,7 +142,6 @@ public class MovementComponent : MonoBehaviour
     }
     
     private void Awake() {
-        perspectiveController = GameObject.Find("StateDrivenCamera").GetComponent<Perspective>();
         stats = gameObject.GetComponent<Stats>();
     }
     

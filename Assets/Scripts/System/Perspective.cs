@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Perspective : MonoBehaviour
 {
+    public static Perspective Instance;
+
     [SerializeField] private Animator animator;
     public enum PerspectiveOptions {
         topDown,
@@ -27,6 +29,7 @@ public class Perspective : MonoBehaviour
 
 
     private void Awake() {
+        Instance = this;
         animator = GetComponent<Animator>();
     }
 

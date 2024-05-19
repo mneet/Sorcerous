@@ -5,7 +5,6 @@ using UnityEngine;
 public class ShootComponent : MonoBehaviour
 {
     [SerializeField] bool playerControlled = false;
-    [SerializeField] private Perspective perspectiveController;
     [SerializeField] private GameObject bulletPreFab;
     private GameObject target;
 
