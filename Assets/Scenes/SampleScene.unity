@@ -623,7 +623,7 @@ GameObject:
   - component: {fileID: 1120387493}
   - component: {fileID: 1120387492}
   - component: {fileID: 1120387491}
-  m_Layer: 3
+  m_Layer: 8
   m_Name: Floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -729,6 +729,7 @@ GameObject:
   - component: {fileID: 1938690040}
   - component: {fileID: 1938690043}
   - component: {fileID: 1938690042}
+  - component: {fileID: 1938690044}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -777,8 +778,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5af10bd573b2da4a96fe5fd87a252e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  perspectiveManager: {fileID: 3951301667896993950}
-  gameManager: {fileID: 0}
   enemyPreFab: {fileID: 2711517753622614249, guid: c279f6b47b66d9c41901d70bf6ac6f25, type: 3}
   topDownRight:
     centerAnchorX: 20
@@ -832,6 +831,21 @@ MonoBehaviour:
   defeatPanel: {fileID: 165015970}
   score: {fileID: 165015969}
   playerHP: {fileID: 165015968}
+--- !u!114 &1938690044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1938690039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9e4c5e31dfbede4d88e992eb5de2a3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &2108826381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1806863597618004965, guid: 50c836dd65fb27c499c16f23fbadf32e, type: 3}
@@ -1453,6 +1467,6 @@ SceneRoots:
   - {fileID: 705507995}
   - {fileID: 3825831011962864098}
   - {fileID: 1938690041}
+  - {fileID: 1120387494}
   - {fileID: 165015967}
   - {fileID: 7021030767864254803}
-  - {fileID: 1120387494}

@@ -45,6 +45,11 @@ public class ShootComponent : MonoBehaviour
                 bullet.transform.rotation = rotation;
             }
         }
+        else {
+            if (Perspective.Instance.perspective == Perspective.PerspectiveOptions.topDown) {
+                bullet.GetComponent<Bullet>().direction = Utility.Instance.GetMouseDirectionTopDown().normalized;
+            }
+        }
     }
 
     private void Awake() {

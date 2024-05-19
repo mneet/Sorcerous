@@ -314,7 +314,14 @@ public class WaveManager : MonoBehaviour
     #endregion 
 
     private void Awake() {
-        Instance = this;
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+
         sideScrollerAreas = new List<SpawnArea> { sideScrollerTop, sideScrollenCenter, sideScrollerDown };
         topDownAreas = new List<SpawnArea> { topDownRight, topDownLeft, topDownCenter };
     }

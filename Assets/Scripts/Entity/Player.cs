@@ -82,13 +82,7 @@ public class Player : MonoBehaviour
 
     // Rotate player
     private void RotatePlayerMouse() {
-        // Obter a posição do mouse na tela
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Vector3 mousePosition = new Vector3();
-        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, mouseLayer)) {
-            mousePosition = raycastHit.point;
-        }
-        mousePosition.y = 0;
+        Vector3 mousePosition = Utility.Instance.GetMouseDirectionTopDown();
         transform.forward = transform.position - mousePosition;     
     }
     #endregion

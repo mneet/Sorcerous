@@ -37,6 +37,12 @@ public class GameManager : MonoBehaviour
 
     private void Awake() {
         hudManager = gameObject.GetComponent<HUDManager>();
-        Instance = this;
+        if (Instance != null && Instance != this) {
+            Destroy(gameObject);
+        }
+        else {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 }
