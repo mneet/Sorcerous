@@ -13,6 +13,7 @@ public class Player : MonoBehaviour
 
     // Game Systems
     [SerializeField] private Perspective perspectiveController;
+    [SerializeField] private LayerMask mouseLayer;
     private PlayerInput playerInput;
 
     // Flags
@@ -81,12 +82,24 @@ public class Player : MonoBehaviour
     }
 
     // Rotate player
-
+    private void RotatePlayerMouse() {
+        // Obter a posição do mouse na tela
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Vector3 mousePosition = new Vector3();
+        if (Physics.Raycast(ray, out RaycastHit raycastHit, Mathf.Infinity, mouseLayer)) {
+            mousePosition = raycastHit.point;
+        }
+        mousePosition.y = 0;
+        transform.forward = transform.position - mousePosition;     
+    }
     #endregion
 
     // Update is called once per frame
     void Update()
     {
-        HandleMovement();
+        if (perspectiveController.perspective == PerspectiveOptions.topDown) RotatePlayerMouse();
+        else transform.rotation = Quaternion.identity;
+
+        HandleMovement();  
     }
 }

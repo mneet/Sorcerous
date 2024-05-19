@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3673747196483826457}
-  - component: {fileID: 2654934483700486845}
+  - component: {fileID: 510371572102305612}
   - component: {fileID: 818245307060739380}
   - component: {fileID: 226591288206112193}
   - component: {fileID: 1586050125073082445}
+  - component: {fileID: 564786458846191021}
   - component: {fileID: 1933389212899135496}
   - component: {fileID: 8739389657782171764}
   m_Layer: 0
@@ -38,7 +39,7 @@ Transform:
   - {fileID: 9044609481593556638}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2654934483700486845
+--- !u!114 &510371572102305612
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,11 +48,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 8616154167674338277}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16da676b44bb184aa8c8594a61a7de7, type: 3}
+  m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 1
-  spawner: {fileID: 0}
+  maxHealth: 10
+  health: 0
+  armor: 0
+  movementSpeed: 10
+  bulletDamage: 0.5
+  fireRate: 0.2
+  bulletLevel: 0
 --- !u!114 &818245307060739380
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +73,9 @@ MonoBehaviour:
   movementSpeed: 10
   bulletPreFab: {fileID: 0}
   perspectiveController: {fileID: 0}
+  mouseLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!114 &226591288206112193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,8 +101,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8558b566275ee1448d0a0f967eb34ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
   immortal: 0
+--- !u!114 &564786458846191021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8616154167674338277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c89c28f3af8e74aa3f32f1a09d9399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControlled: 1
+  perspectiveController: {fileID: 0}
+  bulletPreFab: {fileID: 3265343305577063921, guid: d1c9ab50bddc5f743bd83ec1459623cd, type: 3}
+  fireRate: 0.5
+  bulletLevel: 0
 --- !u!54 &1933389212899135496
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -9,10 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5264780896184850174}
-  - component: {fileID: 471902059142786631}
+  - component: {fileID: 6660436104558076438}
   - component: {fileID: 7865836733560604033}
   - component: {fileID: 5102776927255064854}
   - component: {fileID: 5518433118925566907}
+  - component: {fileID: 5119660402512998625}
   - component: {fileID: 205030223996862514}
   - component: {fileID: 4632824934448205995}
   m_Layer: 0
@@ -39,7 +40,7 @@ Transform:
   - {fileID: 7808274591750820375}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &471902059142786631
+--- !u!114 &6660436104558076438
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,12 +49,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2711517753622614249}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f16da676b44bb184aa8c8594a61a7de7, type: 3}
+  m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isEnemy: 1
-  healPwrup: {fileID: 3297844915496584656, guid: cf3a2c30eff66d941aa83779c1e251f2, type: 3}
-  spawner: {fileID: 0}
+  maxHealth: 2
+  health: 0
+  armor: 0
+  movementSpeed: 10
+  bulletDamage: 0.5
+  fireRate: 1
+  bulletLevel: 0
 --- !u!114 &7865836733560604033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66,7 +71,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8558b566275ee1448d0a0f967eb34ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 2
   immortal: 0
 --- !u!114 &5102776927255064854
 MonoBehaviour:
@@ -82,7 +86,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screenHeight: 25
   screenWidth: 46
-  movementSpeed: 5
   perspectiveController: {fileID: 0}
   movementBehaviour: 0
   movementDirection: 0
@@ -106,6 +109,22 @@ MonoBehaviour:
   perspectiveController: {fileID: 0}
   bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
   fireRate: 3
+  bulletLevel: 0
+--- !u!114 &5119660402512998625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2711517753622614249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e18b61ec330a194aa57a4ca9b854d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 1
+  healPwrup: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!54 &205030223996862514
 Rigidbody:
   m_ObjectHideFlags: 0

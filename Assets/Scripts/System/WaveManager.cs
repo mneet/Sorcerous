@@ -97,11 +97,11 @@ public class WaveManager : MonoBehaviour
         newRound.perspective = perspectiveManager.GetRandomPerspective();
         newRound.InitVariables();
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 1; i++) {
             newRound.formationWaves.Add(FormationWaveGenerator(newRound));
         }
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 1; i++) {
             newRound.runnerWaves.Add(RunnerWaveGenerator(newRound));
         }
 
@@ -117,7 +117,7 @@ public class WaveManager : MonoBehaviour
         float xOrigin = spawnArea.centerAnchorX;
         float yOrigin = spawnArea.centerAnchorY;
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 1; i++) {
             float mobX = 0;
             float mobY = 0;
             float lineDivision = 0f;
@@ -178,7 +178,7 @@ public class WaveManager : MonoBehaviour
                 break;
         }
 
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < 1; i++) {
             float mobX = UnityEngine.Random.Range(xMin, xMax);
             float mobY = UnityEngine.Random.Range(yMin, yMax);
 
@@ -247,7 +247,7 @@ public class WaveManager : MonoBehaviour
             movementComponent.RandomizeMovementDirection();
             list.Add(mob);
 
-            mob.GetComponent<Entity>().spawner = gameObject;
+            mob.GetComponent<ItemDrop>().spawner = gameObject;
 
         }
         return list;

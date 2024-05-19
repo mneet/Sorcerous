@@ -4,39 +4,50 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] private float health = 10f;
     [SerializeField] private bool immortal = false;
 
-    private GameManager gameManager;
-    private bool isPlayer;
-    public void TakeDamage(float damage) {
-        health -= damage;
+    private Stats stats;
 
-        if (isPlayer) gameManager.UpdateHealthUI((int)health);
+    private GameManager gameManager;
+    private WaveManager waveManager;
+    private bool isPlayer;
+
+    // Apply damage to entity
+    public void TakeDamage(float damage) {
+        stats.health -= damage;
+
+        if (isPlayer) gameManager.UpdateHealthUI((int)stats.health);
      
-        if (health <= 0 && !immortal) {
-            if (!isPlayer) gameManager.ScorePoint(1);
-            gameObject.GetComponent<Entity>().DestroySelf();
+        if (stats.health <= 0 && !immortal) {
+            if (!isPlayer) {
+                gameManager.ScorePoint(1);
+                DestroySelfEnemy();
+            }
+            
         }
     }
 
+    // Apply heal to entity
     public void TakeHeal(float heal) {
-        health += heal;
-        if (isPlayer) gameManager.UpdateHealthUI((int)health);
+        stats.health += heal;
+        if (isPlayer) gameManager.UpdateHealthUI((int)stats.health);
     }
 
+    private void DestroySelfEnemy() {
+        waveManager.MobDestroyed(gameObject);
+        Destroy(gameObject);
+    }
+
+    // Setup Health Component variables
     private void Awake() {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        waveManager = gameManager.GetComponent<WaveManager>();
+        stats = gameObject.GetComponent<Stats>();
         isPlayer = CompareTag("Player");
     }
 
     private void Start() {
-        if (isPlayer) gameManager.UpdateHealthUI((int)health);
+        if (isPlayer) gameManager.UpdateHealthUI((int)stats.health);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8ab11dcf7277a04ba33296b4a94868f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  parent: {fileID: 0}
+  parentTag: 
+  speed: 45
   direction: {x: 0, y: 0, z: 1}
+  damage: 5
 --- !u!136 &5871377139139849969
 CapsuleCollider:
   m_ObjectHideFlags: 0

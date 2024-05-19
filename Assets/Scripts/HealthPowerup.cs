@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class HealthPowerup : MonoBehaviour
-{
+public class HealthPowerup : MonoBehaviour {
+    private enum Powers { 
+        HEAL,
+        BULLET,
+        FIRE
+    }
+    [SerializeField] private Powers power;
     [SerializeField] private float heal;
     [SerializeField] private float timerTotal;
     private float currentTimer;
@@ -12,9 +17,13 @@ public class HealthPowerup : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
             Debug.Log("destroy");
-            other.GetComponent<HealthComponent>().TakeHeal(heal);
+            
             Destroy(gameObject);
         }
+    }
+
+    private void Heal(GameObject other) {
+        other.GetComponent<HealthComponent>().TakeHeal(heal);
     }
 
     private void Awake() {

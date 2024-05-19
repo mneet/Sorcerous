@@ -11,6 +11,7 @@ public class ShootComponent : MonoBehaviour
 
     [SerializeField] private float fireRate = 0.5f;
     private float fireCooldown = 0f;
+    public int bulletLevel = 0;
 
     public void ShootBullet() {
 
@@ -28,6 +29,7 @@ public class ShootComponent : MonoBehaviour
         }
 
     }
+    
     public void SetBulletDirection(GameObject bullet) {
         if (!playerControlled) {
             if (gameObject.GetComponent<MovementComponent>().fixedPosition) {
@@ -52,6 +54,7 @@ public class ShootComponent : MonoBehaviour
             fireCooldown = Random.Range(0, fireCooldown);
         }
     }
+   
     // Update is called once per frame
     void Update()
     {

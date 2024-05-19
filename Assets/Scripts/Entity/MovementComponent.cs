@@ -7,28 +7,46 @@ using System;
 
 public class MovementComponent : MonoBehaviour
 {
+    // Room
     [SerializeField] private float screenHeight = 25f;
     [SerializeField] private float screenWidth = 46f;
-    [SerializeField] private float movementSpeed = 10f;
+    
+    // Game Systems
     [SerializeField] private Perspective perspectiveController;
+    private Stats stats;
+
     public enum MovementBehaviour {
         STRAIGHT,
-        DIAGONAL
+        DIAGONAL,
+        CIRCULAR
     }
-    [SerializeField] private MovementBehaviour movementBehaviour;
     private enum MovementDirection {
         RIGHT,
         LEFT,
         UP,
         DOWN
     }
+
+    // Movement controllers
+    [SerializeField] private MovementBehaviour movementBehaviour;
     [SerializeField] private MovementDirection movementDirection;
     [SerializeField] private Vector2 movementDirectionVector;
-    public Vector3 movementDirectionVector3;
 
+    public Vector3 movementDirectionVector3;
     public bool fixedPosition = false;
     public Vector3 targetPosition;
-    
+
+    // Pick direction from enum
+    private MovementDirection GetRandomDirection() {
+        // Obtém todos os valores do enum como um array
+        Array values = Enum.GetValues(typeof(MovementDirection));
+
+        // Gera um índice aleatório entre 0 e o comprimento do array
+        int randomIndex = UnityEngine.Random.Range(0, values.Length);
+
+        // Retorna o valor correspondente ao índice aleatório
+        return (MovementDirection)values.GetValue(randomIndex);
+    }
 
     public void RandomizeMovementDirection() {
         switch (movementBehaviour) {
@@ -90,17 +108,8 @@ public class MovementComponent : MonoBehaviour
 
         transform.position = objectPosition;
     }
-    private MovementDirection GetRandomDirection() {
-        // Obtém todos os valores do enum como um array
-        Array values = Enum.GetValues(typeof(MovementDirection));
-
-        // Gera um índice aleatório entre 0 e o comprimento do array
-        int randomIndex = UnityEngine.Random.Range(0, values.Length);
-
-        // Retorna o valor correspondente ao índice aleatório
-        return (MovementDirection)values.GetValue(randomIndex);
-    }
-
+    
+    // Move entity
     private void BasicStraightMovement() {
         Vector3 movDir = new Vector3(0, 0, 0);
 
@@ -117,11 +126,14 @@ public class MovementComponent : MonoBehaviour
                 break;
         }
 
-        transform.position += movDir * movementSpeed * Time.deltaTime;
+        transform.position += movDir * stats.movementSpeed * Time.deltaTime;
     }
+  
     private void MoveToFormation() {
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, (movementSpeed * 3) * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, targetPosition, (stats.movementSpeed * 3) * Time.deltaTime);
     }
+   
+    // Check if entity left boundaries 
     private void CheckOutOfBorder() {
         bool xLimit = transform.position.x < -screenWidth || transform.position.x > screenWidth;
         bool yLimit = transform.position.y < -screenHeight || transform.position.y > screenHeight;
@@ -129,9 +141,12 @@ public class MovementComponent : MonoBehaviour
 
         if (xLimit || yLimit || zLimit) RandomizeMovementDirection();
     }
+    
     private void Awake() {
         perspectiveController = GameObject.Find("StateDrivenCamera").GetComponent<Perspective>();
+        stats = gameObject.GetComponent<Stats>();
     }
+    
     void Update()
     {
         if (fixedPosition) {
