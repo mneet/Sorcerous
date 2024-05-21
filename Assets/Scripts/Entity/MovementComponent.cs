@@ -4,20 +4,24 @@ using UnityEngine;
 using static Perspective;
 using UnityEngine.EventSystems;
 using System;
+using UnityEditor.U2D;
 
 public class MovementComponent : MonoBehaviour
 {
     // Room
     [SerializeField] private float screenHeight = 25f;
     [SerializeField] private float screenWidth = 46f;
-    
+
     // Game Systems
-     private Stats stats;
+    private Stats stats;
 
     public enum MovementBehaviour {
         STRAIGHT,
         DIAGONAL,
-        CIRCULAR
+        SENOIDAL,
+        KAMIKAZE,
+        TRACKPLAYER,
+        ZIGZAG
     }
     private enum MovementDirection {
         RIGHT,
@@ -34,6 +38,7 @@ public class MovementComponent : MonoBehaviour
     public Vector3 movementDirectionVector3;
     public bool fixedPosition = false;
     public Vector3 targetPosition;
+    Transform cameraTransform;
 
     // Pick direction from enum
     private MovementDirection GetRandomDirection() {
@@ -107,7 +112,11 @@ public class MovementComponent : MonoBehaviour
 
         transform.position = objectPosition;
     }
-    
+    void Start()
+    {
+       cameraTransform =  Camera.main.transform;
+    }
+
     // Move entity
     private void BasicStraightMovement() {
         Vector3 movDir = new Vector3(0, 0, 0);
@@ -127,11 +136,75 @@ public class MovementComponent : MonoBehaviour
 
         transform.position += movDir * stats.movementSpeed * Time.deltaTime;
     }
-  
+
+    private void KamikazeMovement()
+    {
+
+        Transform target = GameObject.Find("Player").transform;
+
+        Vector3 dirTarget = (transform.position - target.position); // direção entre o alvo e o player~
+        dirTarget.y = 0f;
+
+        dirTarget.Normalize(); // normalize a direcao para que o tamanho do vetor seja 1 mas a direcao e sentido se mantenham
+
+        if (Vector3.Distance(target.position, transform.position) > 3f)
+        {
+            transform.Translate(dirTarget * Time.deltaTime * stats.movementSpeed);
+        }
+        transform.rotation = Quaternion.LookRotation(-dirTarget); // faz o objeto olhar para a direcao que esta
+    }
+
+    private void SenoidalMovement()
+    {
+
+    }
+
+    public Vector3 direcaoPadrao;
+    public Vector3 direcaoInvertida;
+    public float posParaInverter;
+    public bool inverteu;
+
+
+    private void InverterDirecao()
+    {
+        if (inverteu == false)
+        {
+            transform.Translate(direcaoPadrao * stats.movementSpeed * Time.deltaTime);
+            if (transform.position.z < (cameraTransform.position.z + posParaInverter))
+            {
+                inverteu = true;
+                transform.rotation = Quaternion.LookRotation(direcaoInvertida);
+            }
+        }
+        else
+        {
+            //inverti
+            transform.Translate(direcaoInvertida * stats.movementSpeed * Time.deltaTime, Space.World);
+        }
+
+    }
+    private void TrackPlayerMovement()
+    {
+        Transform target = GameObject.Find("Player").transform;
+
+        Vector3 dirTarget = (transform.position - target.position); // direção entre o alvo e o player~
+        dirTarget.x = 0f;
+        dirTarget.y = 0f;
+
+        dirTarget.Normalize(); // normalize a direcao para que o tamanho do vetor seja 1 mas a direcao e sentido se mantenham
+
+        if (Vector3.Distance(target.position, transform.position) > 3f)
+        {
+            transform.Translate(dirTarget * Time.deltaTime * stats.movementSpeed);
+        }
+        transform.rotation = Quaternion.LookRotation(-dirTarget); // faz o objeto olhar para a direcao que esta
+    }
+
+
     private void MoveToFormation() {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, (stats.movementSpeed * 3) * Time.deltaTime);
     }
-   
+
     // Check if entity left boundaries 
     private void CheckOutOfBorder() {
         bool xLimit = transform.position.x < -screenWidth || transform.position.x > screenWidth;
@@ -140,9 +213,12 @@ public class MovementComponent : MonoBehaviour
 
         if (xLimit || yLimit || zLimit) RandomizeMovementDirection();
     }
-    
-    private void Awake() {
+   
+
+private void Awake() {
+
         stats = gameObject.GetComponent<Stats>();
+
     }
     
     void Update()
@@ -151,7 +227,24 @@ public class MovementComponent : MonoBehaviour
             MoveToFormation();
         }
         else {
-            BasicStraightMovement();
+            switch(movementBehaviour)
+            {
+                case MovementBehaviour.STRAIGHT: BasicStraightMovement();
+                    break;
+                case MovementBehaviour.KAMIKAZE: KamikazeMovement();    
+                    break;
+                case MovementBehaviour.SENOIDAL: SenoidalMovement();
+                    break;
+                case MovementBehaviour.TRACKPLAYER: TrackPlayerMovement(); 
+                    break;
+                case MovementBehaviour.ZIGZAG: InverterDirecao();
+                    break;
+                
+
+              
+            }
+
+            
         }
         CheckOutOfBorder();
     }
