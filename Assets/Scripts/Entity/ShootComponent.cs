@@ -48,7 +48,7 @@ public class ShootComponent : MonoBehaviour
         }
         else {
             if (Perspective.Instance.perspective == Perspective.PerspectiveOptions.topDown) {
-                bullet.GetComponent<Bullet>().direction = Utility.Instance.GetMouseDirectionTopDown().normalized;
+                bullet.GetComponent<Bullet>().direction = -(bullet.transform.position - Utility.Instance.GetMouseDirectionTopDown()).normalized;
             }
         }
     }

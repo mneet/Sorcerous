@@ -28,7 +28,7 @@ public class MovementComponent : MonoBehaviour
 
     // Movement controllers
     [SerializeField] private MovementBehaviour movementBehaviour;
-    [SerializeField] private MovementDirection movementDirection;
+    private MovementDirection movementDirection;
     private Vector2 movementDirectionVector;
     private Vector3 movementDirectionVector3;
 
