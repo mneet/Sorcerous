@@ -8,10 +8,6 @@ using UnityEditor.U2D;
 
 public class MovementComponent : MonoBehaviour
 {
-    // Room
-    [SerializeField] private float screenHeight = 25f;
-    [SerializeField] private float screenWidth = 46f;
-
     // Game Systems
     private Stats stats;
 
@@ -44,17 +40,7 @@ public class MovementComponent : MonoBehaviour
     public Vector3 targetPosition;
     Transform cameraTransform;
 
-    // Pick direction from enum
-    private MovementDirection GetRandomDirection() {
-        // Obtém todos os valores do enum como um array
-        Array values = Enum.GetValues(typeof(MovementDirection));
-
-        // Gera um índice aleatório entre 0 e o comprimento do array
-        int randomIndex = UnityEngine.Random.Range(0, values.Length);
-
-        // Retorna o valor correspondente ao índice aleatório
-        return (MovementDirection)values.GetValue(randomIndex);
-    }  
+    // Utility
     public Vector3 GetVector3Direction() {
         Vector3 vec3 = new Vector3();
         switch (Perspective.Instance.perspective) {
@@ -68,6 +54,18 @@ public class MovementComponent : MonoBehaviour
         }
         return vec3;
     }
+
+    // Pick direction from enum
+    private MovementDirection GetRandomDirection() {
+        // Obtém todos os valores do enum como um array
+        Array values = Enum.GetValues(typeof(MovementDirection));
+
+        // Gera um índice aleatório entre 0 e o comprimento do array
+        int randomIndex = UnityEngine.Random.Range(0, values.Length);
+
+        // Retorna o valor correspondente ao índice aleatório
+        return (MovementDirection)values.GetValue(randomIndex);
+    }  
     public void RandomizeMovementDirection() {
         switch (movementBehaviour) {
             case MovementBehaviour.DIAGONAL:
@@ -76,6 +74,10 @@ public class MovementComponent : MonoBehaviour
             case MovementBehaviour.STRAIGHT:
                 RandomizeStraightDirection();
                 break;
+            case MovementBehaviour.KAMIKAZE:
+                RandomizeStraightDirection();
+                targetTransform = null;
+                break;
         }
     }
     private void RandomizeStraightDirection() {
@@ -83,8 +85,8 @@ public class MovementComponent : MonoBehaviour
         movementDirection = direction;
         movementDirectionVector = new Vector2(0, 0);
 
-        float screenHeightCenter = screenHeight / 2;
-        float screenWidthCenter = screenWidth / 2;
+        float screenHeightCenter = Perspective.Instance.screenHeight / 2;
+        float screenWidthCenter = Perspective.Instance.screenWidth  / 2;
 
         Vector2 newPosition = new Vector2(0, 0);
         switch (direction) {
@@ -128,6 +130,7 @@ public class MovementComponent : MonoBehaviour
 
         transform.position = objectPosition;
     }
+    
     // Move entity
     private void BasicStraightMovement() {
         Vector3 movDir = new Vector3(0, 0, 0);
@@ -145,7 +148,6 @@ public class MovementComponent : MonoBehaviour
 
         transform.position += movDir * stats.movementSpeed * Time.deltaTime;
     }
-
     private void KamikazeMovement()
     {
         if (targetTransform == null) {
@@ -158,7 +160,6 @@ public class MovementComponent : MonoBehaviour
         }
         transform.position += movementDirectionVector3 * stats.movementSpeed * Time.deltaTime;     
     }
-
     private void SenoidalMovement()
     {
 
@@ -168,8 +169,6 @@ public class MovementComponent : MonoBehaviour
     public Vector3 direcaoInvertida;
     public float posParaInverter;
     public bool inverteu;
-
-
     private void InverterDirecao()
     {
         if (inverteu == false)
@@ -211,9 +210,9 @@ public class MovementComponent : MonoBehaviour
 
     // Check if entity left boundaries 
     private void CheckOutOfBorder() {
-        bool xLimit = transform.position.x < -screenWidth || transform.position.x > screenWidth;
-        bool yLimit = transform.position.y < -screenHeight || transform.position.y > screenHeight;
-        bool zLimit = transform.position.z < -screenWidth || transform.position.z > screenWidth;
+        bool xLimit = transform.position.x < -Perspective.Instance.screenWidth || transform.position.x > Perspective.Instance.screenWidth;
+        bool yLimit = transform.position.y < -Perspective.Instance.screenHeight || transform.position.y > Perspective.Instance.screenHeight;
+        bool zLimit = transform.position.z < -Perspective.Instance.screenWidth || transform.position.z > Perspective.Instance.screenWidth;
 
         if (xLimit || yLimit || zLimit) RandomizeMovementDirection();
     }

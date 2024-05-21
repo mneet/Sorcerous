@@ -27,6 +27,9 @@ public class Perspective : MonoBehaviour
     public float sideScrollerHeightMin;
     public float sideScrollerHeightMax;
 
+    public float screenHeight;
+    public float screenWidth;
+
 
     private void Awake() {
         if (Instance != null && Instance != this) {
