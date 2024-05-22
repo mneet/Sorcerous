@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5225842510915688779
+--- !u!1 &224083412997222780
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,11 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1201433346255649491}
-  - component: {fileID: 4027029132151291806}
-  - component: {fileID: 2887585664977011439}
-  - component: {fileID: 6573095502784474494}
-  - component: {fileID: 584786549816598482}
+  - component: {fileID: 4567858050412297844}
+  - component: {fileID: 2022426622829855459}
+  - component: {fileID: 5457794656963605583}
+  - component: {fileID: 9007357943646552842}
+  - component: {fileID: 548202516806775480}
   m_Layer: 0
   m_Name: Fogao
   m_TagString: Untagged
@@ -20,67 +20,61 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1201433346255649491
+--- !u!4 &4567858050412297844
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5225842510915688779}
+  m_GameObject: {fileID: 224083412997222780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.1413212, y: 4.335321, z: -1.5772798}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8601833468190410036}
+  - {fileID: 1066842826419914420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4027029132151291806
+--- !u!114 &2022426622829855459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5225842510915688779}
+  m_GameObject: {fileID: 224083412997222780}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c8558b566275ee1448d0a0f967eb34ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   immortal: 0
---- !u!114 &2887585664977011439
+--- !u!114 &5457794656963605583
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5225842510915688779}
+  m_GameObject: {fileID: 224083412997222780}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8b2c51bf766ddb34bafeb6f4cc0a2132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenHeight: 25
-  screenWidth: 46
   movementBehaviour: 4
-  movementDirection: 0
-  movementDirectionVector: {x: 0, y: 0}
-  movementDirectionVector3: {x: 0, y: 0, z: 0}
   fixedPosition: 0
   targetPosition: {x: 0, y: 0, z: 0}
   direcaoPadrao: {x: 0, y: 0, z: 0}
   direcaoInvertida: {x: 0, y: 0, z: 0}
   posParaInverter: 0
   inverteu: 0
-  cameraTransform: {fileID: 0}
---- !u!114 &6573095502784474494
+--- !u!114 &9007357943646552842
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5225842510915688779}
+  m_GameObject: {fileID: 224083412997222780}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22c89c28f3af8e74aa3f32f1a09d9399, type: 3}
@@ -90,32 +84,32 @@ MonoBehaviour:
   bulletPreFab: {fileID: 0}
   fireRate: 0.5
   bulletLevel: 0
---- !u!114 &584786549816598482
+--- !u!114 &548202516806775480
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5225842510915688779}
+  m_GameObject: {fileID: 224083412997222780}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 0
-  health: 0
+  maxHealth: 1
+  health: 1
   armor: 0
-  movementSpeed: 0
-  bulletDamage: 0
-  fireRate: 0
-  bulletLevel: 0
---- !u!1001 &8130510850226332383
+  movementSpeed: 1.5
+  bulletDamage: 1.5
+  fireRate: 1
+  bulletLevel: 1
+--- !u!1001 &667824226707939679
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1201433346255649491}
+    m_TransformParent: {fileID: 4567858050412297844}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -170,8 +164,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
---- !u!4 &8601833468190410036 stripped
+--- !u!4 &1066842826419914420 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
-  m_PrefabInstance: {fileID: 8130510850226332383}
+  m_PrefabInstance: {fileID: 667824226707939679}
   m_PrefabAsset: {fileID: 0}

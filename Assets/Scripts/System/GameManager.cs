@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -44,5 +45,15 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
         DontDestroyOnLoad(gameObject);
+
+    
+       
+    }
+    private void Start()
+    {
+        GameObject AudioMan = GameObject.Find("AudioManager");
+
+        AudioMan.GetComponent<AudioController>().TocarBGMusic(1);
     }
 }
+ 

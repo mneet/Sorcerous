@@ -13,7 +13,7 @@ public class MovementComponent : MonoBehaviour
 
     public enum MovementBehaviour {
         STRAIGHT,
-        DIAGONAL,
+        LINEAR_ROTATE,
         KAMIKAZE,
         TRACKPLAYER,
         ZIGZAG
@@ -67,7 +67,7 @@ public class MovementComponent : MonoBehaviour
     }  
     public void RandomizeMovementDirection() {
         switch (movementBehaviour) {
-            case MovementBehaviour.DIAGONAL:
+            case MovementBehaviour.LINEAR_ROTATE:
                 // faz nada
                 break;
             case MovementBehaviour.STRAIGHT:
@@ -146,6 +146,28 @@ public class MovementComponent : MonoBehaviour
         }
 
         transform.position += movDir * stats.movementSpeed * Time.deltaTime;
+    }
+
+    private void LINEAR_ROTATEMovement()
+    {
+        
+            Vector3 movDir = new Vector3(0, 0, 0);
+
+            switch (Perspective.Instance.perspective)
+            {
+
+                case PerspectiveOptions.topDown:
+                    movDir = new Vector3(movementDirectionVector.x, 0, movementDirectionVector.y);
+                    break;
+
+                case PerspectiveOptions.sideScroler:
+                    movDir = new Vector3(0, movementDirectionVector.y, movementDirectionVector.x);
+                    break;
+            }
+
+            transform.position += movDir * stats.movementSpeed * Time.deltaTime;
+            transform.Rotate(0f, stats.movementSpeed * Time.deltaTime, 0f);
+
     }
     private void KamikazeMovement()
     {
@@ -237,7 +259,7 @@ public class MovementComponent : MonoBehaviour
                     break;
                 case MovementBehaviour.KAMIKAZE: KamikazeMovement();    
                     break;
-                case MovementBehaviour.DIAGONAL:;
+                case MovementBehaviour.LINEAR_ROTATE:;
                     break;
                 case MovementBehaviour.TRACKPLAYER: TrackPlayerMovement(); 
                     break;
