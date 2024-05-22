@@ -8,10 +8,6 @@ using UnityEditor.U2D;
 
 public class MovementComponent : MonoBehaviour
 {
-    // Room
-    [SerializeField] private float screenHeight = 25f;
-    [SerializeField] private float screenWidth = 46f;
-
     // Game Systems
     private Stats stats;
 
@@ -31,26 +27,44 @@ public class MovementComponent : MonoBehaviour
 
     // Movement controllers
     [SerializeField] private MovementBehaviour movementBehaviour;
-    [SerializeField] private MovementDirection movementDirection;
-    [SerializeField] private Vector2 movementDirectionVector;
+    private MovementDirection movementDirection;
+    private Vector2 movementDirectionVector;
+    private Vector3 movementDirectionVector3;
 
-    public Vector3 movementDirectionVector3;
+    // Kamikaze
+    private Transform targetTransform = null;
+    private Vector3 targetDirection = new Vector3();
+
     public bool fixedPosition = false;
     public Vector3 targetPosition;
     Transform cameraTransform;
 
-    // Pick direction from enum
-    private MovementDirection GetRandomDirection() {
-        // Obtém todos os valores do enum como um array
-        Array values = Enum.GetValues(typeof(MovementDirection));
+    // Utility
+    public Vector3 GetVector3Direction() {
+        Vector3 vec3 = new Vector3();
+        switch (Perspective.Instance.perspective) {
+            case PerspectiveOptions.topDown:
+                vec3 = new Vector3(movementDirectionVector.x, 0, movementDirectionVector.y);
+                break;
 
-        // Gera um índice aleatório entre 0 e o comprimento do array
-        int randomIndex = UnityEngine.Random.Range(0, values.Length);
-
-        // Retorna o valor correspondente ao índice aleatório
-        return (MovementDirection)values.GetValue(randomIndex);
+            case PerspectiveOptions.sideScroler:
+                vec3 = new Vector3(0, movementDirectionVector.y, movementDirectionVector.x);
+                break;
+        }
+        return vec3;
     }
 
+    // Pick direction from enum
+    private MovementDirection GetRandomDirection() {
+        // Obtï¿½m todos os valores do enum como um array
+        Array values = Enum.GetValues(typeof(MovementDirection));
+
+        // Gera um ï¿½ndice aleatï¿½rio entre 0 e o comprimento do array
+        int randomIndex = UnityEngine.Random.Range(0, values.Length);
+
+        // Retorna o valor correspondente ao ï¿½ndice aleatï¿½rio
+        return (MovementDirection)values.GetValue(randomIndex);
+    }  
     public void RandomizeMovementDirection() {
         switch (movementBehaviour) {
             case MovementBehaviour.DIAGONAL:
@@ -59,6 +73,10 @@ public class MovementComponent : MonoBehaviour
             case MovementBehaviour.STRAIGHT:
                 RandomizeStraightDirection();
                 break;
+            case MovementBehaviour.KAMIKAZE:
+                RandomizeStraightDirection();
+                targetTransform = null;
+                break;
         }
     }
     private void RandomizeStraightDirection() {
@@ -66,8 +84,8 @@ public class MovementComponent : MonoBehaviour
         movementDirection = direction;
         movementDirectionVector = new Vector2(0, 0);
 
-        float screenHeightCenter = screenHeight / 2;
-        float screenWidthCenter = screenWidth / 2;
+        float screenHeightCenter = Perspective.Instance.screenHeight / 2;
+        float screenWidthCenter = Perspective.Instance.screenWidth  / 2;
 
         Vector2 newPosition = new Vector2(0, 0);
         switch (direction) {
@@ -111,11 +129,7 @@ public class MovementComponent : MonoBehaviour
 
         transform.position = objectPosition;
     }
-    void Start()
-    {
-       cameraTransform =  Camera.main.transform;
-    }
-
+    
     // Move entity
     private void BasicStraightMovement() {
         Vector3 movDir = new Vector3(0, 0, 0);
@@ -123,34 +137,27 @@ public class MovementComponent : MonoBehaviour
         switch (Perspective.Instance.perspective) {
 
             case PerspectiveOptions.topDown:
-                movementDirectionVector3 = new Vector3(movementDirectionVector.x, 0, movementDirectionVector.y);
-                movDir = movementDirectionVector3;
+                movDir = new Vector3(movementDirectionVector.x, 0, movementDirectionVector.y);
                 break;
 
             case PerspectiveOptions.sideScroler:
-                movementDirectionVector3 = new Vector3(0, movementDirectionVector.y, movementDirectionVector.x);
-                movDir = movementDirectionVector3;
+                movDir = new Vector3(0, movementDirectionVector.y, movementDirectionVector.x);
                 break;
         }
 
         transform.position += movDir * stats.movementSpeed * Time.deltaTime;
     }
-
     private void KamikazeMovement()
     {
+        if (targetTransform == null) {
+            targetTransform = GameObject.Find("Player").transform;
+            targetPosition = targetTransform.position;
 
-        Transform target = GameObject.Find("Player").transform;
-
-        Vector3 dirTarget = (transform.position - target.position); // direção entre o alvo e o player~
-        dirTarget.y = 0f;
-
-        dirTarget.Normalize(); // normalize a direcao para que o tamanho do vetor seja 1 mas a direcao e sentido se mantenham
-
-        if (Vector3.Distance(target.position, transform.position) > 3f)
-        {
-            transform.Translate(dirTarget * Time.deltaTime * stats.movementSpeed);
+            movementDirectionVector3 = targetTransform.position - transform.position;
+            movementDirectionVector3.Normalize(); // normalize a direcao para que o tamanho do vetor seja 1 mas a direcao e sentido se mantenham
+            transform.rotation = Quaternion.LookRotation(movementDirectionVector3, Vector3.up); // faz o objeto olhar para a direcao que esta
         }
-        transform.rotation = Quaternion.LookRotation(-dirTarget); // faz o objeto olhar para a direcao que esta
+        transform.position += movementDirectionVector3 * stats.movementSpeed * Time.deltaTime;     
     }
 
    
@@ -159,8 +166,6 @@ public class MovementComponent : MonoBehaviour
     public Vector3 direcaoInvertida;
     public float posParaInverter;
     public bool inverteu;
-
-
     private void InverterDirecao()
     {
         if (inverteu == false)
@@ -183,7 +188,7 @@ public class MovementComponent : MonoBehaviour
     {
         Transform target = GameObject.Find("Player").transform;
 
-        Vector3 dirTarget = (transform.position - target.position); // direção entre o alvo e o player~
+        Vector3 dirTarget = (transform.position - target.position); // direï¿½ï¿½o entre o alvo e o player~
         dirTarget.x = 0f;
         dirTarget.y = 0f;
 
@@ -196,28 +201,31 @@ public class MovementComponent : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(-dirTarget); // faz o objeto olhar para a direcao que esta
     }
 
-
     private void MoveToFormation() {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, (stats.movementSpeed * 3) * Time.deltaTime);
     }
 
     // Check if entity left boundaries 
     private void CheckOutOfBorder() {
-        bool xLimit = transform.position.x < -screenWidth || transform.position.x > screenWidth;
-        bool yLimit = transform.position.y < -screenHeight || transform.position.y > screenHeight;
-        bool zLimit = transform.position.z < -screenWidth || transform.position.z > screenWidth;
+        bool xLimit = transform.position.x < -Perspective.Instance.screenWidth || transform.position.x > Perspective.Instance.screenWidth;
+        bool yLimit = transform.position.y < -Perspective.Instance.screenHeight || transform.position.y > Perspective.Instance.screenHeight;
+        bool zLimit = transform.position.z < -Perspective.Instance.screenWidth || transform.position.z > Perspective.Instance.screenWidth;
 
         if (xLimit || yLimit || zLimit) RandomizeMovementDirection();
     }
    
 
-private void Awake() {
+    private void Awake() {
 
         stats = gameObject.GetComponent<Stats>();
 
     }
-    
-    void Update()
+
+    void Start() {
+        cameraTransform = Camera.main.transform;
+    }
+
+    private void Update()
     {
         if (fixedPosition) {
             MoveToFormation();
@@ -234,14 +242,9 @@ private void Awake() {
                 case MovementBehaviour.TRACKPLAYER: TrackPlayerMovement(); 
                     break;
                 case MovementBehaviour.ZIGZAG: InverterDirecao();
-                    break;
-                
-
-              
+                    break;           
             }
-
-            
+            CheckOutOfBorder();
         }
-        CheckOutOfBorder();
     }
 }

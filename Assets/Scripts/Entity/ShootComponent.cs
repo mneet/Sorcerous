@@ -43,14 +43,15 @@ public class ShootComponent : MonoBehaviour
                 }
             }
             else {
-                bullet.GetComponent<Bullet>().direction = gameObject.GetComponent<MovementComponent>().movementDirectionVector3;
-                Quaternion rotation = Quaternion.LookRotation(gameObject.GetComponent<MovementComponent>().movementDirectionVector3, Vector3.up);
+                Vector3 mobDirection = gameObject.GetComponent<MovementComponent>().GetVector3Direction();
+                bullet.GetComponent<Bullet>().direction = mobDirection;
+                Quaternion rotation = Quaternion.LookRotation(mobDirection, Vector3.up);
                 bullet.transform.rotation = rotation;
             }
         }
         else {
             if (Perspective.Instance.perspective == Perspective.PerspectiveOptions.topDown) {
-                bullet.GetComponent<Bullet>().direction = Utility.Instance.GetMouseDirectionTopDown().normalized;
+                bullet.GetComponent<Bullet>().direction = -(bullet.transform.position - Utility.Instance.GetMouseDirectionTopDown()).normalized;
             }
         }
     }
