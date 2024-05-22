@@ -25,6 +25,9 @@ public class ShootComponent : MonoBehaviour
             bullet.GetComponent<Bullet>().parentTag = tag;
             SetBulletDirection(bullet);
             fireCooldown = fireRate;
+            GameObject AudioMan = GameObject.Find("AudioManager");
+
+            AudioMan.GetComponent<AudioController>().TocarSFX(1);
         }
 
     }

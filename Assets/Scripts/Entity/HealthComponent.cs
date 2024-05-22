@@ -22,6 +22,8 @@ public class HealthComponent : MonoBehaviour
             }
             
         }
+        GameObject AudioMan = GameObject.Find("AudioManager");
+        AudioMan.GetComponent<AudioController>().TocarSFX(0);
     }
 
     // Apply heal to entity

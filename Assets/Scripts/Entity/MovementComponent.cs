@@ -18,7 +18,6 @@ public class MovementComponent : MonoBehaviour
     public enum MovementBehaviour {
         STRAIGHT,
         DIAGONAL,
-        SENOIDAL,
         KAMIKAZE,
         TRACKPLAYER,
         ZIGZAG
@@ -154,10 +153,7 @@ public class MovementComponent : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(-dirTarget); // faz o objeto olhar para a direcao que esta
     }
 
-    private void SenoidalMovement()
-    {
-
-    }
+   
 
     public Vector3 direcaoPadrao;
     public Vector3 direcaoInvertida;
@@ -233,7 +229,7 @@ private void Awake() {
                     break;
                 case MovementBehaviour.KAMIKAZE: KamikazeMovement();    
                     break;
-                case MovementBehaviour.SENOIDAL: SenoidalMovement();
+                case MovementBehaviour.DIAGONAL:;
                     break;
                 case MovementBehaviour.TRACKPLAYER: TrackPlayerMovement(); 
                     break;
