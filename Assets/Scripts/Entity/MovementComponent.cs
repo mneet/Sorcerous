@@ -4,7 +4,6 @@ using UnityEngine;
 using static Perspective;
 using UnityEngine.EventSystems;
 using System;
-using UnityEditor.U2D;
 
 public class MovementComponent : MonoBehaviour
 {
