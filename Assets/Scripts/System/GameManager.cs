@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private GameObject pauseMenu;
+    private bool pause = false;
     [SerializeField] private int score = 0;
 
     public static GameManager Instance;
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
         if (score >= 30) {
             hudManager.ActivateVictory();
             gameEnded = true;
+            Time.timeScale = 0f;
         }
     }
 
@@ -28,12 +31,26 @@ public class GameManager : MonoBehaviour
         if (health <= 0) {
             hudManager.ActivateDefeat();
             gameEnded = true;
+            Time.timeScale = 0f;
         }
     }
 
     public void RestartGame() {
         Debug.Log("Restarting game");
         SceneManager.LoadScene(0);
+        Time.timeScale = 1f;
+    }
+
+    public void PauseGame() {
+        pause = !pause;
+        if (pause) {
+            Time.timeScale = 0f;
+            pauseMenu.SetActive(true);
+        }
+        else {
+            Time.timeScale = 1f;
+            pauseMenu.SetActive(false);
+        }
     }
 
     private void Awake() {
@@ -51,6 +68,12 @@ public class GameManager : MonoBehaviour
         GameObject AudioMan = GameObject.Find("AudioManager");
 
         AudioMan.GetComponent<AudioController>().TocarBGMusic(1);
+    }
+
+    private void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            PauseGame();
+        }
     }
 }
  

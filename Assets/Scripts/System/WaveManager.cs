@@ -153,7 +153,7 @@ public class WaveManager : MonoBehaviour
             WaveMob mob = new WaveMob();
             mob.position = mobPosition;
             mob.spawnPosition = new Vector3(20f,20f,20f);
-            switch (Perspective.Instance.perspective) {
+            switch (round.perspective) {
                 case PerspectiveOptions.sideScroler:
                     mob.preFab = PickRandomList(SideScrollFixedMob);
                     break;
@@ -207,7 +207,7 @@ public class WaveManager : MonoBehaviour
             WaveMob mob = new WaveMob();
             mob.spawnPosition = mobPosition;
             mob.position = mobPosition;
-            switch (Perspective.Instance.perspective) {
+            switch (round.perspective) {
                 case PerspectiveOptions.sideScroler:
                     mob.preFab = PickRandomList(SideScrollMoveMob);
                     break;
