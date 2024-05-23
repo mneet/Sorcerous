@@ -7,15 +7,12 @@ public class ShootComponent : MonoBehaviour
     [SerializeField] bool playerControlled = false;
     [SerializeField] private GameObject bulletPreFab;
     private GameObject target;
+    private Stats stats;
 
-    [SerializeField] private float fireRate = 0.5f;
     private float fireCooldown = 0f;
     public int bulletLevel = 0;
 
     public void ShootBullet() {
-
-        fireCooldown -= Time.deltaTime;
-
         if (fireCooldown <= 0f) {
             Vector3 position = transform.position;
             Quaternion rotation = transform.rotation;
@@ -24,7 +21,7 @@ public class ShootComponent : MonoBehaviour
             bullet.GetComponent<Bullet>().parent = gameObject;
             bullet.GetComponent<Bullet>().parentTag = tag;
             SetBulletDirection(bullet);
-            fireCooldown = fireRate;
+            fireCooldown = stats.fireRate;
             GameObject AudioMan = GameObject.Find("AudioManager");
 
             AudioMan.GetComponent<AudioController>().TocarSFX(1);
@@ -59,13 +56,15 @@ public class ShootComponent : MonoBehaviour
     private void Awake() {
         if (!playerControlled) {
             target = GameObject.Find("Player");
-            fireCooldown = Random.Range(0, fireCooldown);
+            fireCooldown = Random.Range(0, fireCooldown);         
         }
+        stats = gameObject.GetComponent<Stats>();
     }
    
     // Update is called once per frame
     void Update()
     {
+        fireCooldown -= Time.deltaTime;
         if (!playerControlled) {
             ShootBullet();
         }

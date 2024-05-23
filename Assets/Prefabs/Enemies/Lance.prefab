@@ -12,8 +12,11 @@ GameObject:
   - component: {fileID: 3242447504409665177}
   - component: {fileID: 2175843347118852356}
   - component: {fileID: 6089200178932756081}
+  - component: {fileID: 3074885561631906672}
+  - component: {fileID: 5495534368781106588}
+  - component: {fileID: 293962264982778204}
   m_Layer: 0
-  m_Name: TerraLance
+  m_Name: Lance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -60,10 +63,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c51bf766ddb34bafeb6f4cc0a2132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screenHeight: 25
-  screenWidth: 46
-  movementBehaviour: 3
-  movementDirection: 0
+  movementBehaviour: 2
   fixedPosition: 0
   targetPosition: {x: 0, y: 0, z: 0}
   direcaoPadrao: {x: 0, y: 0, z: 0}
@@ -89,6 +89,69 @@ MonoBehaviour:
   bulletDamage: 0
   fireRate: 0
   bulletLevel: 0
+--- !u!114 &3074885561631906672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524085296173237158}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e18b61ec330a194aa57a4ca9b854d1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isEnemy: 1
+  healPwrup: {fileID: 3297844915496584656, guid: cf3a2c30eff66d941aa83779c1e251f2, type: 3}
+  spawner: {fileID: 0}
+--- !u!65 &5495534368781106588
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524085296173237158}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.6876912, y: 0.42152596, z: 3.8972032}
+  m_Center: {x: -0.0007147789, y: 0.110556126, z: 1.1195382}
+--- !u!54 &293962264982778204
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524085296173237158}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1670583999271332098
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -147,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 604fcf23f775c23489371aec99faef13, type: 3}
       propertyPath: m_Name
-      value: TerraLance (1)
+      value: TerraLance
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

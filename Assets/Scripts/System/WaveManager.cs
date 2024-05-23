@@ -21,6 +21,11 @@ public class WaveManager : MonoBehaviour
 
     // Generation variables
     [SerializeField] private GameObject enemyPreFab;
+    [SerializeField] private List<GameObject> TopDownFixedMob;
+    [SerializeField] private List<GameObject> TopDownMoveMob;
+    [SerializeField] private List<GameObject> SideScrollFixedMob;
+    [SerializeField] private List<GameObject> SideScrollMoveMob;
+
     private SpawnArea lastSpawnedArea;
     private int waveCountMax = 3;
 
@@ -148,7 +153,14 @@ public class WaveManager : MonoBehaviour
             WaveMob mob = new WaveMob();
             mob.position = mobPosition;
             mob.spawnPosition = new Vector3(20f,20f,20f);
-            mob.preFab = enemyPreFab;
+            switch (Perspective.Instance.perspective) {
+                case PerspectiveOptions.sideScroler:
+                    mob.preFab = PickRandomList(SideScrollFixedMob);
+                    break;
+                case PerspectiveOptions.topDown:
+                    mob.preFab = PickRandomList(TopDownFixedMob);
+                    break;
+            }
             mob.formation = true;
 
             wave.waveMobs.Add(mob);
@@ -195,7 +207,14 @@ public class WaveManager : MonoBehaviour
             WaveMob mob = new WaveMob();
             mob.spawnPosition = mobPosition;
             mob.position = mobPosition;
-            mob.preFab = enemyPreFab;
+            switch (Perspective.Instance.perspective) {
+                case PerspectiveOptions.sideScroler:
+                    mob.preFab = PickRandomList(SideScrollMoveMob);
+                    break;
+                case PerspectiveOptions.topDown:
+                    mob.preFab = PickRandomList(TopDownMoveMob);
+                    break;
+            }
             mob.formation = false;
 
             wave.waveMobs.Add(mob);
@@ -229,6 +248,12 @@ public class WaveManager : MonoBehaviour
         int randomIndex = Mathf.Max(UnityEngine.Random.Range(0, optionsList.Count()) - 1, 0);
     
         return optionsList[randomIndex];
+    }
+    private GameObject PickRandomList(List<GameObject> list) {
+
+        int randomIndex = Mathf.Max(UnityEngine.Random.Range(0, list.Count()) - 1, 0);
+        Debug.Log(randomIndex);
+        return list[randomIndex];
     }
 
     #endregion

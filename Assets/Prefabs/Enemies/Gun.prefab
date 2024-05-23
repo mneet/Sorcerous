@@ -9,12 +9,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4567858050412297844}
+  - component: {fileID: 548202516806775480}
   - component: {fileID: 2022426622829855459}
   - component: {fileID: 5457794656963605583}
   - component: {fileID: 9007357943646552842}
-  - component: {fileID: 548202516806775480}
+  - component: {fileID: -1553168242887540013}
+  - component: {fileID: -2811151029825267440}
+  - component: {fileID: -5269480686593846335}
   m_Layer: 0
-  m_Name: Fogao
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,13 +32,32 @@ Transform:
   m_GameObject: {fileID: 224083412997222780}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1413212, y: 4.335321, z: -1.5772798}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1066842826419914420}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &548202516806775480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224083412997222780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 2
+  health: 2
+  armor: 0
+  movementSpeed: 7
+  bulletDamage: 1
+  fireRate: 2
+  bulletLevel: 1
 --- !u!114 &2022426622829855459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,10 +103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlled: 0
-  bulletPreFab: {fileID: 0}
-  fireRate: 0.5
+  bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
   bulletLevel: 0
---- !u!114 &548202516806775480
+--- !u!114 &-1553168242887540013
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,16 +114,60 @@ MonoBehaviour:
   m_GameObject: {fileID: 224083412997222780}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
+  m_Script: {fileID: 11500000, guid: 4e18b61ec330a194aa57a4ca9b854d1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
-  health: 1
-  armor: 0
-  movementSpeed: 1.5
-  bulletDamage: 1.5
-  fireRate: 1
-  bulletLevel: 1
+  isEnemy: 1
+  healPwrup: {fileID: 3297844915496584656, guid: cf3a2c30eff66d941aa83779c1e251f2, type: 3}
+  spawner: {fileID: 0}
+--- !u!65 &-2811151029825267440
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224083412997222780}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.43004578, z: 0.95103365}
+  m_Center: {x: 0, y: -0.025994428, z: 0.2208511}
+--- !u!54 &-5269480686593846335
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224083412997222780}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &667824226707939679
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -113,15 +178,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.062487368
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.3632299
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.482861
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
       propertyPath: m_LocalRotation.w
