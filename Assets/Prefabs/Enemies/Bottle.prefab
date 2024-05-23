@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3324997338526930910}
   m_Layer: 0
   m_Name: Bottle
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,12 +51,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 1
+  maxHealth: 2
   health: 0
   armor: 0
   movementSpeed: 14
   bulletDamage: 0.6
-  fireRate: 1
+  fireRate: 2
   bulletLevel: 0
 --- !u!114 &8751508101584645423
 MonoBehaviour:
@@ -232,6 +232,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: fa9fe14f3eb136b49947a6b09c1cb5b1, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
     - target: {fileID: 919132149155446097, guid: fa9fe14f3eb136b49947a6b09c1cb5b1, type: 3}
       propertyPath: m_Name
       value: Garrafa

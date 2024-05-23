@@ -38,7 +38,6 @@ public class Perspective : MonoBehaviour
         else {
             Instance = this;
         }
-        DontDestroyOnLoad(gameObject);
         animator = GetComponent<Animator>();
     }
 

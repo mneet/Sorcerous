@@ -12,13 +12,12 @@ GameObject:
   - component: {fileID: 5380624931218362525}
   - component: {fileID: 5735600637951958869}
   - component: {fileID: 5949338007605042386}
-  - component: {fileID: 2919618318813051094}
   - component: {fileID: 3348255387455498207}
   - component: {fileID: 3710209661614792490}
   - component: {fileID: 7476467454496934459}
   m_Layer: 0
   m_Name: Sword
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5.86}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2221975303534175383}
   m_Father: {fileID: 0}
@@ -54,7 +53,7 @@ MonoBehaviour:
   maxHealth: 4
   health: 5
   armor: 0
-  movementSpeed: 10
+  movementSpeed: 8
   bulletDamage: 0.4
   fireRate: 1
   bulletLevel: 0
@@ -83,28 +82,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c51bf766ddb34bafeb6f4cc0a2132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementBehaviour: 0
+  movementBehaviour: 2
   fixedPosition: 0
   targetPosition: {x: 0, y: 0, z: 0}
   direcaoPadrao: {x: 0, y: 0, z: 0}
   direcaoInvertida: {x: 0, y: 0, z: 0}
   posParaInverter: 0
   inverteu: 0
---- !u!114 &2919618318813051094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5693584590536158883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22c89c28f3af8e74aa3f32f1a09d9399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerControlled: 0
-  bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
-  bulletLevel: 0
 --- !u!114 &3348255387455498207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +123,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3.4925668, z: 1}
-  m_Center: {x: 0, y: -0.5197371, z: 0}
+  m_Size: {x: 1, y: 0.58659065, z: 3.4844456}
+  m_Center: {x: 0, y: 0.11096428, z: -0.4792807}
 --- !u!54 &7476467454496934459
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -216,6 +200,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
     - target: {fileID: 919132149155446097, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
       propertyPath: m_Name
       value: EspadaAr

@@ -27,6 +27,5 @@ public class Utility : MonoBehaviour
         else {
             Instance = this;
         }
-        DontDestroyOnLoad(gameObject);
     }
 }

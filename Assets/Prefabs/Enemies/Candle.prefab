@@ -52,12 +52,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 2
+  maxHealth: 3
   health: 0
   armor: 0
   movementSpeed: 10
   bulletDamage: 0.5
-  fireRate: 1
+  fireRate: 2.3
   bulletLevel: 0
 --- !u!114 &7865836733560604033
 MonoBehaviour:
@@ -105,7 +105,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
-  fireRate: 3
   bulletLevel: 0
 --- !u!114 &5119660402512998625
 MonoBehaviour:
@@ -287,15 +286,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_LocalPosition.x
@@ -352,7 +351,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: c17801dd590e28b40b147ab6ce7ba002, type: 2}
+      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
     - target: {fileID: 919132149155446097, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_Name
       value: Candelabro

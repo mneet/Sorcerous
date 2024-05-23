@@ -149,8 +149,7 @@ public class MovementComponent : MonoBehaviour
     }
 
     private void LINEAR_ROTATEMovement()
-    {
-        
+    {        
             Vector3 movDir = new Vector3(0, 0, 0);
 
             switch (Perspective.Instance.perspective)

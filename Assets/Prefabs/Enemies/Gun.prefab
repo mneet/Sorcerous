@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -5269480686593846335}
   m_Layer: 0
   m_Name: Gun
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -33,8 +33,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 4, y: 4, z: 4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1066842826419914420}
   m_Father: {fileID: 0}
@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c51bf766ddb34bafeb6f4cc0a2132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementBehaviour: 4
+  movementBehaviour: 0
   fixedPosition: 0
   targetPosition: {x: 0, y: 0, z: 0}
   direcaoPadrao: {x: 0, y: 0, z: 0}
@@ -217,9 +217,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: c17801dd590e28b40b147ab6ce7ba002, type: 2}
+      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
     - target: {fileID: 919132149155446097, guid: 9bca4540edf116847b49c77ab37c21b7, type: 3}
       propertyPath: m_Name
       value: RevolverFogo
