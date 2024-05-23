@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2245051781251509891}
   - component: {fileID: 8661917784398411111}
   m_Layer: 0
-  m_Name: HealthPwrup
+  m_Name: WaterPwrup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91b4cf69317a9e64c9472a2ba85046e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  power: 0
   heal: 3
   timerTotal: 2.5
 --- !u!65 &8661917784398411111
@@ -131,7 +132,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e38871d2dc356524b99014b45de2eafa, type: 2}
+  - {fileID: 2100000, guid: 9afc9f2b62a16d84c89f5781c5ea9349, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

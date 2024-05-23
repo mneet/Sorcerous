@@ -17,7 +17,8 @@ public class ItemDrop : MonoBehaviour
 
         if (isEnemy) {
             int dice = Random.Range(0, 100);
-            if (dice > 70) {
+            if (dice > 50) {
+                Debug.Log("Powerup");
                 Instantiate(healPwrup, transform.position, Quaternion.identity);
             }
         }

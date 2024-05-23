@@ -5,9 +5,10 @@ using UnityEngine;
 
 public class HealthPowerup : MonoBehaviour {
     private enum Powers { 
-        HEAL,
-        BULLET,
-        FIRE
+        WATER,
+        FIRE,
+        EARTH,
+        WIND
     }
     [SerializeField] private Powers power;
     [SerializeField] private float heal;
@@ -16,14 +17,23 @@ public class HealthPowerup : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.CompareTag("Player")) {
-            Debug.Log("destroy");
-            
+            Stats playerStats = other.gameObject.GetComponent<Stats>();
+            switch (power) {
+                case Powers.WATER:
+                    Heal(other.gameObject); break;
+                case Powers.FIRE:
+                    playerStats.UpgradeFire(); break;
+                case Powers.EARTH: 
+                    playerStats.UpgradeEarth(); break;
+                case Powers.WIND:
+                    playerStats.UpgradeWind(); break;
+            }           
             Destroy(gameObject);
         }
     }
 
     private void Heal(GameObject other) {
-        other.GetComponent<HealthComponent>().TakeHeal(heal);
+        other.GetComponent<HealthComponent>().TakeHeal(1);
     }
 
     private void Awake() {

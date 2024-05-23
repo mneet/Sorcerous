@@ -17,4 +17,14 @@ public class Stats : MonoBehaviour
     private void Awake() {
         health = maxHealth;
     }
+
+    public void UpgradeFire() {
+        fireRate -= (float)(fireRate * 0.1);
+    }
+    public void UpgradeEarth() {
+        maxHealth += 1;
+    }
+    public void UpgradeWind() {
+        movementSpeed -= (float)(movementSpeed * 0.1);
+    }
 }

@@ -251,7 +251,7 @@ public class WaveManager : MonoBehaviour
     }
     private GameObject PickRandomList(List<GameObject> list) {
 
-        int randomIndex = Mathf.Max(UnityEngine.Random.Range(0, list.Count()) - 1, 0);
+        int randomIndex = Mathf.Max(UnityEngine.Random.Range(0, list.Count()));
         Debug.Log(randomIndex);
         return list[randomIndex];
     }
