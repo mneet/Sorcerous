@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3348255387455498207}
   - component: {fileID: 3710209661614792490}
   - component: {fileID: 7476467454496934459}
+  - component: {fileID: -7942107055973453028}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Enemy
@@ -53,9 +54,9 @@ MonoBehaviour:
   maxHealth: 4
   health: 5
   armor: 0
-  movementSpeed: 8
+  movementSpeed: 10
   bulletDamage: 0.4
-  fireRate: 1
+  fireRate: 0.6
   bulletLevel: 0
 --- !u!114 &5735600637951958869
 MonoBehaviour:
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b2c51bf766ddb34bafeb6f4cc0a2132, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementBehaviour: 2
+  movementBehaviour: 0
   fixedPosition: 0
   targetPosition: {x: 0, y: 0, z: 0}
   direcaoPadrao: {x: 0, y: 0, z: 0}
@@ -152,6 +153,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-7942107055973453028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693584590536158883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22c89c28f3af8e74aa3f32f1a09d9399, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerControlled: 0
+  bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
+  bulletLevel: 0
 --- !u!1001 &1827533157640242044
 PrefabInstance:
   m_ObjectHideFlags: 0

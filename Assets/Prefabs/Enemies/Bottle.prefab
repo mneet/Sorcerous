@@ -84,7 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementBehaviour: 0
-  fixedPosition: 0
+  fixedPosition: 1
   targetPosition: {x: 0, y: 0, z: 0}
   direcaoPadrao: {x: 0, y: 0, z: 0}
   direcaoInvertida: {x: 0, y: 0, z: 0}
