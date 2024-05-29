@@ -106,7 +106,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 41e897f3350d89341a8dcf10bb028a20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -28.124
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: de220f85caf96304b8d48b9dc7543aba, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: de220f85caf96304b8d48b9dc7543aba, type: 3}
       propertyPath: m_Name
       value: Mesa2
@@ -283,6 +287,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b5dd0ca279aeb0a4da110abe2091b258, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 796f53f4c6249f14f8b4626c77dab808, type: 2}
     - target: {fileID: 919132149155446097, guid: b5dd0ca279aeb0a4da110abe2091b258, type: 3}
       propertyPath: m_Name
       value: Espelho (1)
@@ -357,6 +365,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 35.023
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: de220f85caf96304b8d48b9dc7543aba, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: de220f85caf96304b8d48b9dc7543aba, type: 3}
       propertyPath: m_Name
       value: Mesa2 (2)
@@ -431,6 +443,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 88.346
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
       propertyPath: m_Name
       value: Stante (1)
@@ -505,6 +521,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -28.124
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 81d6d3580549f6f4c83213d4e585605b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: 81d6d3580549f6f4c83213d4e585605b, type: 3}
       propertyPath: m_Name
       value: Mesa
@@ -579,6 +599,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.164
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
       propertyPath: m_Name
       value: Stante (3)
@@ -653,6 +677,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -89.164
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
       propertyPath: m_Name
       value: Stante (2)
@@ -727,6 +755,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 81d6d3580549f6f4c83213d4e585605b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: 81d6d3580549f6f4c83213d4e585605b, type: 3}
       propertyPath: m_Name
       value: Mesa (1)
@@ -801,6 +833,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: b5dd0ca279aeb0a4da110abe2091b258, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 796f53f4c6249f14f8b4626c77dab808, type: 2}
     - target: {fileID: 919132149155446097, guid: b5dd0ca279aeb0a4da110abe2091b258, type: 3}
       propertyPath: m_Name
       value: Espelho
@@ -875,6 +911,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 35.023
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 81d6d3580549f6f4c83213d4e585605b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: 81d6d3580549f6f4c83213d4e585605b, type: 3}
       propertyPath: m_Name
       value: Mesa (2)
@@ -949,6 +989,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: de220f85caf96304b8d48b9dc7543aba, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: de220f85caf96304b8d48b9dc7543aba, type: 3}
       propertyPath: m_Name
       value: Mesa2 (1)
@@ -1023,6 +1067,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 88.346
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5a75c79988d139f4d947cfa8e0ccc906, type: 2}
     - target: {fileID: 919132149155446097, guid: 91bfed0e10c9dfe488c9ba5d6aef815d, type: 3}
       propertyPath: m_Name
       value: Stante
