@@ -20,6 +20,7 @@ public class ShootComponent : MonoBehaviour
             GameObject bullet = Instantiate(bulletPreFab, position, rotation);
             bullet.GetComponent<Bullet>().parent = gameObject;
             bullet.GetComponent<Bullet>().parentTag = tag;
+            bullet.GetComponent<Bullet>().damage = stats.bulletDamage;
             SetBulletDirection(bullet);
             fireCooldown = stats.fireRate;
             GameObject AudioMan = GameObject.Find("AudioManager");

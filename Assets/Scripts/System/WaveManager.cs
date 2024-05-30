@@ -19,8 +19,8 @@ public class WaveManager : MonoBehaviour
     private List<GameObject> formationMobList = new List<GameObject>();
     private List<GameObject> runnerMobList = new List<GameObject>();
 
-    private float timerStartDelayMax = 3f;
-    private float timerStartDelay = 3f;
+    private float timerStartDelayMax = 2f;
+    private float timerStartDelay = 2f;
     private bool waveStartDelay = true;
 
     // Generation variables

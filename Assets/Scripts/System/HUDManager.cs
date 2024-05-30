@@ -11,10 +11,10 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private Text playerHP;
 
     public void UpdateScore(int newScore) {
-        score.text = $"Pontos: {newScore}";
+        score.text = $"PONTOS: {newScore}";
     }
     public void UpdatePlayerHP(int hp) {
-        playerHP.text = $"Vida: {hp}";
+        playerHP.text = $"VIDA: {hp}";
     }
 
     public void ActivateVictory() {

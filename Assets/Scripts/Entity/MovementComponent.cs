@@ -14,7 +14,7 @@ public class MovementComponent : MonoBehaviour
         STRAIGHT,
         LINEAR_ROTATE,
         KAMIKAZE,
-        TRACKPLAYER,
+        SENOID,
         ZIGZAG
     }
     private enum MovementDirection {
@@ -38,6 +38,10 @@ public class MovementComponent : MonoBehaviour
     public Vector3 targetPosition;
     Transform cameraTransform;
 
+    // ZIGZAG
+    private float invertTimerMax = 1.2f;
+    private float invertTimer = 1.2f;
+
     // Utility
     public Vector3 GetVector3Direction() {
         Vector3 vec3 = new Vector3();
@@ -52,7 +56,6 @@ public class MovementComponent : MonoBehaviour
         }
         return vec3;
     }
-
     // Pick direction from enum
     private MovementDirection GetRandomDirection() {
         // Obt�m todos os valores do enum como um array
@@ -64,6 +67,7 @@ public class MovementComponent : MonoBehaviour
         // Retorna o valor correspondente ao �ndice aleat�rio
         return (MovementDirection)values.GetValue(randomIndex);
     }  
+    // Randomize Direction
     public void RandomizeMovementDirection() {
         switch (movementBehaviour) {
             case MovementBehaviour.LINEAR_ROTATE:
@@ -76,8 +80,12 @@ public class MovementComponent : MonoBehaviour
                 RandomizeStraightDirection();
                 targetTransform = null;
                 break;
+            case MovementBehaviour.ZIGZAG:
+                RandomizeZigZagDirection();
+                break;
         }
     }
+    // Randomize position and direction for straight movements
     private void RandomizeStraightDirection() {
         MovementDirection direction = GetRandomDirection();
         movementDirection = direction;
@@ -111,6 +119,47 @@ public class MovementComponent : MonoBehaviour
         }
         ApplyPosition(newPosition);
     }
+    // Randomize position and direction for ZigZag movements
+    private void RandomizeZigZagDirection() {
+        MovementDirection direction = GetRandomDirection();
+        movementDirection = direction;
+        movementDirectionVector = new Vector2(0, 0);
+
+        float screenHeightCenter = Perspective.Instance.screenHeight / 2;
+        float screenWidthCenter = Perspective.Instance.screenWidth / 2;
+
+        Vector2 newPosition = new Vector2(0, 0);
+        switch (direction) {
+            case MovementDirection.RIGHT:
+                movementDirectionVector.x = 1;
+                movementDirectionVector.y = 0.5f;
+                newPosition.x = UnityEngine.Random.Range(-screenWidthCenter - 10, -screenWidthCenter);
+                newPosition.y = UnityEngine.Random.Range(-screenHeightCenter + 2, screenHeightCenter - 2);
+                break;
+            case MovementDirection.LEFT:
+                movementDirectionVector.x = -1;
+                movementDirectionVector.y = 0.5f;
+                newPosition.x = UnityEngine.Random.Range(screenWidthCenter, screenWidthCenter + 10);
+                newPosition.y = UnityEngine.Random.Range(-screenHeightCenter + 2, screenHeightCenter - 2);
+                break;
+            case MovementDirection.UP:
+                movementDirectionVector.y = 1;
+                movementDirectionVector.x = 0.5f;
+                newPosition.x = UnityEngine.Random.Range(-screenWidthCenter + 2, screenWidthCenter - 2);
+                newPosition.y = UnityEngine.Random.Range(-screenHeightCenter, -screenHeightCenter - 10);
+                break;
+            case MovementDirection.DOWN:
+                movementDirectionVector.y = -1;
+                movementDirectionVector.x = 0.5f;
+                newPosition.x = UnityEngine.Random.Range(-screenWidthCenter + 2, screenWidthCenter - 2);
+                newPosition.y = UnityEngine.Random.Range(screenHeightCenter, screenHeightCenter + 10);
+                break;
+        }
+        transform.rotation = Quaternion.LookRotation(GetVector3Direction(), Vector3.up);
+        movementDirectionVector.Normalize();
+        ApplyPosition(newPosition);
+    }
+    // Move entity to randomized position
     private void ApplyPosition(Vector2 newPosition) {
 
         Vector3 objectPosition = new Vector3();
@@ -129,7 +178,7 @@ public class MovementComponent : MonoBehaviour
         transform.position = objectPosition;
     }
     
-    // Move entity
+    // Move entity in straight line
     private void BasicStraightMovement() {
         Vector3 movDir = new Vector3(0, 0, 0);
 
@@ -146,27 +195,7 @@ public class MovementComponent : MonoBehaviour
 
         transform.position += movDir * stats.movementSpeed * Time.deltaTime;
     }
-
-    private void LINEAR_ROTATEMovement()
-    {        
-            Vector3 movDir = new Vector3(0, 0, 0);
-
-            switch (Perspective.Instance.perspective)
-            {
-
-                case PerspectiveOptions.topDown:
-                    movDir = new Vector3(movementDirectionVector.x, 0, movementDirectionVector.y);
-                    break;
-
-                case PerspectiveOptions.sideScroler:
-                    movDir = new Vector3(0, movementDirectionVector.y, movementDirectionVector.x);
-                    break;
-            }
-
-            transform.position += movDir * stats.movementSpeed * Time.deltaTime;
-            transform.Rotate(0f, stats.movementSpeed * Time.deltaTime, 0f);
-
-    }
+    // Move entity towards target
     private void KamikazeMovement()
     {
         if (targetTransform == null) {
@@ -179,47 +208,29 @@ public class MovementComponent : MonoBehaviour
         }
         transform.position += movementDirectionVector3 * stats.movementSpeed * Time.deltaTime;     
     }
-
-   
-
-    public Vector3 direcaoPadrao;
-    public Vector3 direcaoInvertida;
-    public float posParaInverter;
-    public bool inverteu;
-    private void InverterDirecao()
-    {
-        if (inverteu == false)
-        {
-            transform.Translate(direcaoPadrao * stats.movementSpeed * Time.deltaTime);
-            if (transform.position.z < (cameraTransform.position.z + posParaInverter))
-            {
-                inverteu = true;
-                transform.rotation = Quaternion.LookRotation(direcaoInvertida);
-            }
-        }
-        else
-        {
-            //inverti
-            transform.Translate(direcaoInvertida * stats.movementSpeed * Time.deltaTime, Space.World);
+    // Move enitty in zigzag pattern
+    private void ZigZag() {
+       
+        invertTimer -= Time.deltaTime;
+        Vector3 movDir = GetVector3Direction();
+        if (invertTimer <= 0) {
+            switch (movementDirection) {
+                case MovementDirection.UP:
+                case MovementDirection.DOWN:
+                    movementDirectionVector.x *= -1f;
+                    break;
+                case MovementDirection.LEFT:
+                case MovementDirection.RIGHT:
+                    movementDirectionVector.y *= -1f;
+                    break;
+            }          
+            invertTimer = invertTimerMax;
         }
 
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(movDir, Vector3.up), 4f);
+        transform.position += movDir * stats.movementSpeed * Time.deltaTime;
     }
-    private void TrackPlayerMovement()
-    {
-        Transform target = GameObject.Find("Player").transform;
 
-        Vector3 dirTarget = (transform.position - target.position); // dire��o entre o alvo e o player~
-        dirTarget.x = 0f;
-        dirTarget.y = 0f;
-
-        dirTarget.Normalize(); // normalize a direcao para que o tamanho do vetor seja 1 mas a direcao e sentido se mantenham
-
-        if (Vector3.Distance(target.position, transform.position) > 3f)
-        {
-            transform.Translate(dirTarget * Time.deltaTime * stats.movementSpeed);
-        }
-        transform.rotation = Quaternion.LookRotation(-dirTarget); // faz o objeto olhar para a direcao que esta
-    }
 
     private void MoveToFormation() {
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, (stats.movementSpeed * 3) * Time.deltaTime);
@@ -257,11 +268,7 @@ public class MovementComponent : MonoBehaviour
                     break;
                 case MovementBehaviour.KAMIKAZE: KamikazeMovement();    
                     break;
-                case MovementBehaviour.LINEAR_ROTATE:;
-                    break;
-                case MovementBehaviour.TRACKPLAYER: TrackPlayerMovement(); 
-                    break;
-                case MovementBehaviour.ZIGZAG: InverterDirecao();
+                case MovementBehaviour.ZIGZAG: ZigZag();
                     break;           
             }
             CheckOutOfBorder();

@@ -12,14 +12,15 @@ public class Bullet : MonoBehaviour
     
 
     private void CheckOutOfScreen() {
-        if (transform.position.x > 30 || transform.position.y > 30 || transform.position.z > 30) {
+        if (transform.position.x > 30 || transform.position.y > 30 || transform.position.z > 30 ||
+            transform.position.x < -30 || transform.position.y < -30 || transform.position.z < -30) {
             Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
 
-        if (!other.gameObject.CompareTag(parentTag)) {
+        if (!other.gameObject.CompareTag(parentTag) && !other.gameObject.CompareTag(tag)) {
             HealthComponent health = other.GetComponent<HealthComponent>();
             if (health != null) {
                 health.TakeDamage(damage);
