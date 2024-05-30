@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
         score += point;
         hudManager.UpdateScore(score);
 
-        if (score >= 60) {
+        if (score >= 40) {
             hudManager.ActivateVictory();
             gameEnded = true;
             Time.timeScale = 0f;
