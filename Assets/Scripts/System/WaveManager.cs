@@ -19,6 +19,10 @@ public class WaveManager : MonoBehaviour
     private List<GameObject> formationMobList = new List<GameObject>();
     private List<GameObject> runnerMobList = new List<GameObject>();
 
+    private float timerStartDelayMax = 3f;
+    private float timerStartDelay = 3f;
+    private bool waveStartDelay = true;
+
     // Generation variables
     [SerializeField] private GameObject enemyPreFab;
     [SerializeField] private List<GameObject> TopDownFixedMob;
@@ -279,8 +283,7 @@ public class WaveManager : MonoBehaviour
     // Control Wave spawn and call SpawnMobList
     private List<GameObject> SpawnWave(Wave wave, bool fixedPosition) {
         List<GameObject> mobList = new List<GameObject>();
-        if (!wave.waveSpawned) {
-            Perspective.Instance.SwitchPerspective(currentRound.perspective);
+        if (!wave.waveSpawned) { 
             mobList = SpawnMobList(wave.waveMobs, fixedPosition);
             wave.waveSpawned = true;
         }
@@ -289,17 +292,28 @@ public class WaveManager : MonoBehaviour
     // Call SpawnWave for Formation and Runner Waves
     private void RoundManager() {
 
-        if (!formationWaveSpawned && currentRound.formationWaveFlag) {
-            formationMobList = SpawnWave(currentRound.formationWaves[currentRound.formationWaveInd], true);
-            formationWaveSpawned = true;
+        if (!waveStartDelay) {
+            if (!formationWaveSpawned && currentRound.formationWaveFlag) {
+                formationMobList = SpawnWave(currentRound.formationWaves[currentRound.formationWaveInd], true);
+                formationWaveSpawned = true;
+            }
+            if (!runnerWaveSpawned && currentRound.runnerWaveFlag) {
+                runnerMobList = SpawnWave(currentRound.runnerWaves[currentRound.runnerWaveInd], false);
+                runnerWaveSpawned = true;
+            }
         }
-        if (!runnerWaveSpawned && currentRound.runnerWaveFlag) {
-            runnerMobList = SpawnWave(currentRound.runnerWaves[currentRound.runnerWaveInd], false);
-            runnerWaveSpawned = true;
+        else {
+            timerStartDelay -= Time.deltaTime;
+            if (timerStartDelay <= 0) {
+                waveStartDelay = false;
+                timerStartDelay = timerStartDelayMax;
+            }
         }
-
+    
         if (!currentRound.runnerWaveFlag && !currentRound.formationWaveFlag) {
             currentRound = RoundGenerator();
+            Perspective.Instance.SwitchPerspective(currentRound.perspective);
+            waveStartDelay = true;
         }
     }
     // Check if given list contains the given mob and remove it from the list, returns false if the list is empty
