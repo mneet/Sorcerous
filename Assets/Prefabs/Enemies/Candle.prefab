@@ -351,7 +351,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
+      objectReference: {fileID: 2100000, guid: bf5ff1c7d5b0dcc4c99ce72d7c18b5cd, type: 2}
     - target: {fileID: 919132149155446097, guid: 231fdee2c16399d439add3b2b5e5d485, type: 3}
       propertyPath: m_Name
       value: Candelabro

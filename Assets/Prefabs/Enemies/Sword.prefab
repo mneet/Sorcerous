@@ -215,15 +215,15 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
+      objectReference: {fileID: 2100000, guid: 0c3d5540978da8844b7afd9e7854e34f, type: 2}
     - target: {fileID: -7511558181221131132, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
+      objectReference: {fileID: 2100000, guid: 0c3d5540978da8844b7afd9e7854e34f, type: 2}
     - target: {fileID: -7511558181221131132, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
-      objectReference: {fileID: 2100000, guid: d1ac426f4d498ba49b827a8a055aadfe, type: 2}
+      objectReference: {fileID: 2100000, guid: 0c3d5540978da8844b7afd9e7854e34f, type: 2}
     - target: {fileID: 919132149155446097, guid: 4978df84e21af2640bfe1a3511fb9ff6, type: 3}
       propertyPath: m_Name
       value: EspadaAr
