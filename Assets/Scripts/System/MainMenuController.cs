@@ -1,23 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenuController : MonoBehaviour
-{
+public class MainMenuController : MonoBehaviour {
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private GameObject mainMenu;
     private bool pause = false;
-    private void Start()
-    {
+    private void Start() {
         AudioController.Instance.TocarBGMusic(0);
     }
-    public void AbrirConfiguracoes(){
+    public void AbrirConfiguracoes() {
 
     }
-    public void CarregarCena(int idCena){
-         SceneManager.LoadScene(idCena);
-         AudioController.Instance.TocarBGMusic(1);
+    public void CarregarCena(int idCena) {
+        SceneManager.LoadScene(idCena);
+        AudioController.Instance.TocarBGMusic(1);
     }
 
     public void PauseGame() {
@@ -32,5 +31,18 @@ public class MainMenuController : MonoBehaviour
             pauseMenu.SetActive(false);
             mainMenu.SetActive(true);
         }
+    }
+
+
+    //DEBUG
+    private void ScreenShoot() {
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            ScreenCapture.CaptureScreenshot("SomeLevel.png");
+            Debug.Log("Screenshoot taken");
+        }
+    }
+
+    private void Update() {
+        ScreenShoot();
     }
 }
