@@ -8,13 +8,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject pauseMenu;
     private bool pause = false;
-    [SerializeField] private int score = 0;
+    public int score = 0;
 
     public static GameManager Instance;
 
     public bool gameEnded = false;
 
     private HUDManager hudManager;
+
     public void ScorePoint(int point) {
         score += point;
         hudManager.UpdateScore(score);
@@ -26,7 +27,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpdateHealthUI(int health) {
+    public void UpdateHealthUI(float health) {
         hudManager.UpdatePlayerHP(health);
         if (health <= 0) {
             hudManager.ActivateDefeat();

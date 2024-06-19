@@ -32,6 +32,7 @@ public class WaveManager : MonoBehaviour
 
     private SpawnArea lastSpawnedArea;
     private int waveCountMax = 3;
+    public int waveCount = 0;
 
     public enum waveOrientation {
         horizontal,
@@ -68,6 +69,8 @@ public class WaveManager : MonoBehaviour
         public bool formationWaveFlag;
         public bool runnerWaveFlag;
 
+        public bool roundFlag;
+
         public void InitVariables() {
             formationWaves = new List<Wave>();
             runnerWaves = new List<Wave>();
@@ -75,6 +78,7 @@ public class WaveManager : MonoBehaviour
             formationWaveInd = 0;
             formationWaveFlag = true;
             runnerWaveFlag = true;
+            roundFlag = false;
         }
     }
     public struct WaveMob {
@@ -256,7 +260,6 @@ public class WaveManager : MonoBehaviour
     private GameObject PickRandomList(List<GameObject> list) {
 
         int randomIndex = Mathf.Max(UnityEngine.Random.Range(0, list.Count()));
-        Debug.Log(randomIndex);
         return list[randomIndex];
     }
 
@@ -309,11 +312,18 @@ public class WaveManager : MonoBehaviour
                 timerStartDelay = timerStartDelayMax;
             }
         }
-    
+
         if (!currentRound.runnerWaveFlag && !currentRound.formationWaveFlag) {
             currentRound = RoundGenerator();
             Perspective.Instance.SwitchPerspective(currentRound.perspective);
             waveStartDelay = true;
+
+            if (!currentRound.roundFlag) {
+                Debug.Log($" Wave: {waveCount}");
+                waveCount += 1;
+                HUDManager.Instance.UpdateWave(waveCount);
+                currentRound.roundFlag = true;
+            }
         }
     }
     // Check if given list contains the given mob and remove it from the list, returns false if the list is empty

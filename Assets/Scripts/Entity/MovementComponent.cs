@@ -204,7 +204,7 @@ public class MovementComponent : MonoBehaviour
 
             movementDirectionVector3 = targetTransform.position - transform.position;
             movementDirectionVector3.Normalize(); // normalize a direcao para que o tamanho do vetor seja 1 mas a direcao e sentido se mantenham
-            transform.rotation = Quaternion.LookRotation(movementDirectionVector3, Vector3.up); // faz o objeto olhar para a direcao que esta
+            transform.forward = -movementDirectionVector3; // faz o objeto olhar para a direcao que esta
         }
         transform.position += movementDirectionVector3 * stats.movementSpeed * Time.deltaTime;     
     }

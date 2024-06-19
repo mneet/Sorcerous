@@ -13,7 +13,7 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(float damage) {
         stats.health -= damage;
 
-        if (isPlayer) GameManager.Instance.UpdateHealthUI((int)stats.health);
+        if (isPlayer) GameManager.Instance.UpdateHealthUI(stats.health / stats.maxHealth);
      
         if (stats.health <= 0 && !immortal) {
             if (!isPlayer) {
