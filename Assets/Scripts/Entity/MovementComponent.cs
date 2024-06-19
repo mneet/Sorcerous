@@ -17,7 +17,7 @@ public class MovementComponent : MonoBehaviour
         SENOID,
         ZIGZAG
     }
-    private enum MovementDirection {
+    public enum MovementDirection {
         RIGHT,
         LEFT,
         UP,

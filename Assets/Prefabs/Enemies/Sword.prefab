@@ -51,8 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 4
-  health: 5
+  maxHealth: 1
+  health: 1
   armor: 0
   movementSpeed: 10
   bulletDamage: 0.4

@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
     // Rotate player
     private void RotatePlayerMouse() {
         Vector3 mousePosition = Utility.Instance.GetMouseDirectionTopDown();
-        transform.forward = transform.position - mousePosition;     
+        transform.forward = -(transform.position - mousePosition);     
     }
     #endregion
 

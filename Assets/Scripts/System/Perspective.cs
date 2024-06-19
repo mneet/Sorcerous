@@ -61,6 +61,7 @@ public class Perspective : MonoBehaviour
         perspective = newPerspective;
         SwitchState(perspective);
     }
+    
     public PerspectiveOptions GetRandomPerspective() {
         List<PerspectiveOptions> values = new List<PerspectiveOptions>();
         values.Add(PerspectiveOptions.topDown);
