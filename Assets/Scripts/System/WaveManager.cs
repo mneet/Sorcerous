@@ -376,6 +376,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start() {
         currentRound = RoundGenerator();
+        Perspective.Instance.SwitchPerspective(currentRound.perspective);
     }
 
     void Update()

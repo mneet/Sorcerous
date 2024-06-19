@@ -57,6 +57,7 @@ public class Perspective : MonoBehaviour
     }
 
     public void SwitchPerspective(PerspectiveOptions newPerspective) {
+        Debug.Log(newPerspective);
         lastPerspective = perspective;
         perspective = newPerspective;
         SwitchState(perspective);

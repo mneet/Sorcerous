@@ -252,10 +252,6 @@ public class MovementComponent : MonoBehaviour
 
     }
 
-    void Start() {
-        cameraTransform = Camera.main.transform;
-    }
-
     private void Update()
     {
         if (fixedPosition) {

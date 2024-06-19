@@ -18,7 +18,12 @@ public class HealthComponent : MonoBehaviour
         if (stats.health <= 0 && !immortal) {
             if (!isPlayer) {
                 GameManager.Instance.ScorePoint(1);
-                gameObject.GetComponent<ItemDrop>().DestroySelf();
+                if (gameObject.GetComponent<ItemDrop>() != null) {
+                    gameObject.GetComponent<ItemDrop>().DestroySelf();
+                }
+                else {
+                    Destroy(gameObject);
+                }
             }
             
         }

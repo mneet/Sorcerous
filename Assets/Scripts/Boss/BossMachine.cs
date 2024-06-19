@@ -46,14 +46,12 @@ public class BossMachine : MonoBehaviour
     // Positions
     [SerializeField] private Vector3 centerPosition;
     [SerializeField] private Vector3 topCenterPosition;
-
+    [SerializeField] private Vector3 fourCornerPosition;
     [Header("Boss parts")]
     // Boss parts
     [SerializeField] private GameObject rightArm;
     [SerializeField] private GameObject leftArm;
     [SerializeField] private GameObject bossCore;
-    [SerializeField] private GameObject innerShield;
-    [SerializeField] private GameObject outerShield;
 
     [SerializeField] private GameObject healerMob;
 
@@ -123,24 +121,31 @@ public class BossMachine : MonoBehaviour
 
 
         // RightArm
-        Stats rightArmHp = rightArm.GetComponent<Stats>();
-        if (rightArmHp.isActiveAndEnabled) totalHp += rightArmHp.health;
+        if (rightArm != null) {
+            Stats rightArmHp = rightArm.GetComponent<Stats>();
+            if (rightArmHp.isActiveAndEnabled) totalHp += rightArmHp.health;
+        }
 
         // LeftArm
-        Stats leftArmHp = leftArm.GetComponent<Stats>();
-        if (leftArmHp.isActiveAndEnabled) totalHp += leftArmHp.health;
-
-        // InnerShield
-        Stats innerShieldHp = innerShield.GetComponent<Stats>();
-        if (innerShieldHp.isActiveAndEnabled) totalHp += innerShieldHp.health;
-
-        // InnerShield
-        Stats outerShieldHp = outerShield.GetComponent<Stats>();
-        if (outerShieldHp.isActiveAndEnabled) totalHp += outerShieldHp.health;
+        if (leftArm != null) {
+            Stats leftArmHp = leftArm.GetComponent<Stats>();
+            if (leftArmHp.isActiveAndEnabled) totalHp += leftArmHp.health;
+        }
 
         return totalHp;
     }
 
+    private void rotateToPosition(Vector3 destPos) {
+
+        transform.forward = Vector3.MoveTowards(transform.forward, -(transform.position - destPos), 1 * Time.deltaTime);
+
+    }
+
+    private void defaultRotation() {
+        Debug.Log(transform.forward);
+        transform.forward = Vector3.MoveTowards(transform.forward, new Vector3(0f, 0f, -1f), 5 * Time.deltaTime);
+
+    }
 
     #region State Methods
     private void idleState()
@@ -149,11 +154,13 @@ public class BossMachine : MonoBehaviour
             // Se move para posição incial
             slideToPosition(topCenterPosition);
             toggleShooting(false);
+            defaultRotation();
             if (transform.position == topCenterPosition) {
                 stateSet = true;
             }
         }
         else {
+            defaultRotation();
             // Condição de troca de estado
             if (transform.position == topCenterPosition) {
                     state = pickStateFromList();
@@ -166,6 +173,7 @@ public class BossMachine : MonoBehaviour
     private void healState()
     {
         if (!stateSet) {
+            defaultRotation();
             slideToPosition(topCenterPosition);
             toggleShooting(false);
             if (transform.position == topCenterPosition) {             
@@ -173,7 +181,7 @@ public class BossMachine : MonoBehaviour
             }
         }
         else {
-
+            defaultRotation();
             healSpawnTimer -= Time.deltaTime;
             if (healSpawnTimer <= 0) {
                 healSpawnTimer = healSpawnTimerMax;
@@ -196,13 +204,14 @@ public class BossMachine : MonoBehaviour
     {
         if (!stateSet) {
             slideToPosition(topCenterPosition);
-
+            defaultRotation();
             if (transform.position == topCenterPosition) {
                 toggleShooting(true);
                 stateSet = true;
             }
         }
         else {
+            defaultRotation();
             // Aplicando movimento
             transform.position += moveDirVec * (movementSpeed / 2) * Time.deltaTime;
 
@@ -222,9 +231,9 @@ public class BossMachine : MonoBehaviour
 
     private void fourCornersState() {
         if (!stateSet) {
-            slideToPosition(topCenterPosition);
+            slideToPosition(fourCornerPosition);
 
-            if (transform.position == topCenterPosition) {
+            if (transform.position == fourCornerPosition) {
                 moveDirVec = new Vector3(1, 0, 0);
                 toggleShooting(true);
                 stateSet = true;
@@ -237,6 +246,11 @@ public class BossMachine : MonoBehaviour
             if (transform.position.x >= maxX) {
                 moveDirVec = new Vector3(0,0,-1);
             }
+
+            Vector3 clampVector = transform.position;
+            clampVector.x = Mathf.Clamp(clampVector.x, minX, maxX);
+            clampVector.z = Mathf.Clamp(clampVector.z, minZ, maxZ);
+            transform.position = clampVector;
 
             switch (direction) {
                 case MovementComponent.MovementDirection.RIGHT:
@@ -259,13 +273,13 @@ public class BossMachine : MonoBehaviour
                     }
                     break;
                 case MovementComponent.MovementDirection.UP:
-                    if (transform.position.z >= maxZ + 0.1f) {
+                    if (transform.position.z >= maxZ - 4f) {
                         moveDirVec = new Vector3(1, 0, 0);
                         direction = MovementComponent.MovementDirection.RIGHT;
                     }
                     break;
             }
-            transform.LookAt(new Vector3(0f,0f,0f));
+            rotateToPosition(new Vector3(0f, 0f, 0f));
 
             // Condição de troca de estado
             stateTimer -= Time.deltaTime;
@@ -273,7 +287,7 @@ public class BossMachine : MonoBehaviour
                 state = pickStateFromList();
                 stateTimer = stateTimerMax;
                 stateSet = false;
-
+                defaultRotation();
             }
         }
     }
@@ -286,7 +300,7 @@ public class BossMachine : MonoBehaviour
         }
 
         slideToPosition(centerPosition);
-
+        transform.Rotate(new Vector3(0f,1f,0f) * 30 * Time.deltaTime);
         // Condição de troca de estado
         if (transform.position == centerPosition)
         {
