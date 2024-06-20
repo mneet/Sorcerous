@@ -25,6 +25,7 @@ public class WaveManager : MonoBehaviour
 
     // Generation variables
     [SerializeField] private GameObject enemyPreFab;
+    [SerializeField] private GameObject bossPrefab;
     [SerializeField] private List<GameObject> TopDownFixedMob;
     [SerializeField] private List<GameObject> TopDownMoveMob;
     [SerializeField] private List<GameObject> SideScrollFixedMob;
@@ -265,20 +266,50 @@ public class WaveManager : MonoBehaviour
 
     #endregion
 
+    private Round BossRound() {
+        Round bossRound = new Round();
+        bossRound.InitVariables();
+
+        Wave bossWave = new Wave();
+        bossWave.InitVariables();
+
+        bossRound.perspective = Perspective.PerspectiveOptions.topDown;
+
+        WaveMob bossMob = new WaveMob();
+        bossMob.preFab = bossPrefab;
+        bossMob.spawnPosition = new Vector3(0f, 0f, 20f);
+        bossMob.formation = false;
+        bossMob.position = new Vector3(0f, 0f, 0f);
+
+        bossWave.waveMobs.Add(bossMob);
+        bossRound.formationWaves.Add(bossWave);
+        bossRound.runnerWaveFlag = false;
+
+        Debug.Log(bossRound);
+
+        return bossRound;
+    }
+
     #region Gameplay Management Methods
     // Spawn a given mob list and return the GameObject list
     private List<GameObject> SpawnMobList(List<WaveMob> mobList, bool fixedPosition) {
         List<GameObject> list = new List<GameObject>();
+        
         for (var i = 0; i < mobList.Count(); i++) {
+            Debug.Log(mobList.Count());
             WaveMob mobStruct = mobList[i];
-            GameObject mob = Instantiate(mobStruct.preFab, mobStruct.spawnPosition, Quaternion.identity);
+            GameObject mob = Instantiate(mobStruct.preFab, mobStruct.spawnPosition, new Quaternion(0f,1f,0f,0f));
             MovementComponent movementComponent = mob.GetComponent<MovementComponent>();
-            movementComponent.fixedPosition = fixedPosition;
-            movementComponent.targetPosition = mobStruct.position;
-            movementComponent.RandomizeMovementDirection();
+            if (movementComponent != null) {
+                movementComponent.fixedPosition = fixedPosition;
+                movementComponent.targetPosition = mobStruct.position;
+                movementComponent.RandomizeMovementDirection();
+            }
             list.Add(mob);
 
-            mob.GetComponent<ItemDrop>().spawner = gameObject;
+            if (mob.GetComponent<ItemDrop>() != null) {
+                mob.GetComponent<ItemDrop>().spawner = gameObject;
+            }
 
         }
         return list;
@@ -292,18 +323,19 @@ public class WaveManager : MonoBehaviour
         }
         return mobList;
     }
+
     // Call SpawnWave for Formation and Runner Waves
     private void RoundManager() {
 
         if (!waveStartDelay) {
-            if (!formationWaveSpawned && currentRound.formationWaveFlag) {
-                formationMobList = SpawnWave(currentRound.formationWaves[currentRound.formationWaveInd], true);
-                formationWaveSpawned = true;
-            }
-            if (!runnerWaveSpawned && currentRound.runnerWaveFlag) {
-                runnerMobList = SpawnWave(currentRound.runnerWaves[currentRound.runnerWaveInd], false);
-                runnerWaveSpawned = true;
-            }
+                if (!formationWaveSpawned && currentRound.formationWaveFlag && currentRound.formationWaves.Count > 0) {
+                    formationMobList = SpawnWave(currentRound.formationWaves[currentRound.formationWaveInd], true);
+                    formationWaveSpawned = true;
+                }
+                if (!runnerWaveSpawned && currentRound.runnerWaveFlag && currentRound.runnerWaves.Count > 0) {
+                    runnerMobList = SpawnWave(currentRound.runnerWaves[currentRound.runnerWaveInd], false);
+                    runnerWaveSpawned = true;
+                }
         }
         else {
             timerStartDelay -= Time.deltaTime;
@@ -314,9 +346,15 @@ public class WaveManager : MonoBehaviour
         }
 
         if (!currentRound.runnerWaveFlag && !currentRound.formationWaveFlag) {
-            currentRound = RoundGenerator();
-            Perspective.Instance.SwitchPerspective(currentRound.perspective);
-            waveStartDelay = true;
+            if ((waveCount + 1) % 5 == 0) {
+                Debug.Log("Boss Wave");
+                currentRound = BossRound();
+            }
+            else {
+                currentRound = RoundGenerator();
+                Perspective.Instance.SwitchPerspective(currentRound.perspective);
+                waveStartDelay = true;
+            }
 
             if (!currentRound.roundFlag) {
                 Debug.Log($" Wave: {waveCount}");
@@ -328,10 +366,11 @@ public class WaveManager : MonoBehaviour
     }
     // Check if given list contains the given mob and remove it from the list, returns false if the list is empty
     private bool CheckWaveList(GameObject mob, List<GameObject> mobList) {
+      
         bool waveInProgress = true;
         if (mobList.Contains(mob)) {
             mobList.Remove(mob);
-
+            Debug.Log("List checked");
             if (mobList.Count() <= 0) {
                 waveInProgress = false;
             }
@@ -362,6 +401,10 @@ public class WaveManager : MonoBehaviour
     }
     #endregion 
 
+    public void skipToBoss() {
+
+    }
+
     private void Awake() {
         if (Instance != null && Instance != this) {
             Destroy(gameObject);
@@ -375,7 +418,7 @@ public class WaveManager : MonoBehaviour
     }
 
     private void Start() {
-        currentRound = RoundGenerator();
+        currentRound = BossRound();
         Perspective.Instance.SwitchPerspective(currentRound.perspective);
     }
 
