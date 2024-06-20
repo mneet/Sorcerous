@@ -349,8 +349,10 @@ public class WaveManager : MonoBehaviour
             if ((waveCount + 1) % 5 == 0) {
                 Debug.Log("Boss Wave");
                 currentRound = BossRound();
+                Perspective.Instance.SwitchPerspective(currentRound.perspective);
             }
             else {
+                Debug.Log("Generating new Round");
                 currentRound = RoundGenerator();
                 Perspective.Instance.SwitchPerspective(currentRound.perspective);
                 waveStartDelay = true;
@@ -401,8 +403,32 @@ public class WaveManager : MonoBehaviour
     }
     #endregion 
 
-    public void skipToBoss() {
+    public void clearRound() {
+        Debug.Log($"Runner Waves: {currentRound.runnerWaves.Count}");
+        if (currentRound.runnerWaves.Count > 0 && runnerMobList.Count > 0){
+            for (var i = 0; i < runnerMobList.Count; i++){
+                Destroy(runnerMobList[i]);
+            }
+            currentRound.runnerWaveFlag=false;
+            runnerMobList = new List<GameObject>();
+        }
 
+        Debug.Log($"Formation Waves: {currentRound.formationWaves.Count}");
+        if (currentRound.formationWaves.Count > 0 && formationMobList.Count > 0){
+            for (var i = 0; i < formationMobList.Count; i++){
+                Destroy(formationMobList[i]);
+            }
+            
+            currentRound.formationWaveFlag = false;
+            formationMobList = new List<GameObject>();
+        }
+
+        formationWaveSpawned = false;
+        runnerWaveSpawned = false;
+    }
+    public void skipToBoss() {
+        clearRound();
+        waveCount += (5 - (waveCount % 5)) -1;
     }
 
     private void Awake() {
@@ -425,5 +451,15 @@ public class WaveManager : MonoBehaviour
     void Update()
     {
         if (!GameManager.Instance.gameEnded) RoundManager();
+
+        // Debugs
+        if (Input.GetKeyDown(KeyCode.F1)) {
+            Debug.Log("Clearing wave");
+            clearRound();
+        }
+        if (Input.GetKeyDown(KeyCode.F2)) {
+            Debug.Log("Skipping to boss wave");
+            skipToBoss();
+        }
     }
 }

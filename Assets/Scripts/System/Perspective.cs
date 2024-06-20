@@ -86,7 +86,7 @@ public class Perspective : MonoBehaviour
     }
 
     private void Update() {
-        DebugSwitchPerspective();
+        //DebugSwitchPerspective();
         if (activePerspective != perspective) SwitchState(perspective);
     }
 }
