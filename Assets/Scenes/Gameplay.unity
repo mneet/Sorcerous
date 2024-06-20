@@ -1892,6 +1892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pauseMenu: {fileID: 842695425}
   score: 0
+  scoreWin: 200
   gameEnded: 0
 --- !u!4 &1938690041
 Transform:
@@ -2533,7 +2534,7 @@ PrefabInstance:
       objectReference: {fileID: 3951301667896993950}
     - target: {fileID: 510371572102305612, guid: 41ceb16dc7a48c943bc000a0640a9a8b, type: 3}
       propertyPath: maxHealth
-      value: 2000
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 818245307060739380, guid: 41ceb16dc7a48c943bc000a0640a9a8b, type: 3}
       propertyPath: bulletPreFab

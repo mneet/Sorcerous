@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     private bool pause = false;
     public int score = 0;
+    [SerializeField] private int scoreWin = 200;
 
     public static GameManager Instance;
 
@@ -20,13 +21,13 @@ public class GameManager : MonoBehaviour
         score += point;
         hudManager.UpdateScore(score);
 
-        /*
-        if (score >= 40) {
+        
+        if (score >= scoreWin) {
             hudManager.ActivateVictory();
             gameEnded = true;
             Time.timeScale = 0f;
         }
-        */
+        
     }
 
     public void UpdateHealthUI(float health) {
