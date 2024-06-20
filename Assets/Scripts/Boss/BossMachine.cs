@@ -26,6 +26,12 @@ public class BossMachine : MonoBehaviour
     private float stateTimerMax;
 
     [SerializeField] private Slider healthBar;
+    [SerializeField] private Slider lanternHealthBar;
+    [SerializeField] private Slider staffHealthBar;
+
+    private Stats coreStats;
+    private Stats lanternStats;
+    private Stats staffStats;
 
     private float hp;
     private float maxHp;
@@ -51,7 +57,7 @@ public class BossMachine : MonoBehaviour
     // Boss parts
     [SerializeField] private GameObject rightArm;
     [SerializeField] private GameObject leftArm;
-    [SerializeField] private GameObject bossCore;
+    [SerializeField] private GameObject bossShield;
 
     [SerializeField] private GameObject healerMob;
 
@@ -96,20 +102,24 @@ public class BossMachine : MonoBehaviour
 
     }
 
-
     private void toggleShooting(bool flag) {
 
         // Parent
+
         ShootComponent coreShoot = gameObject.GetComponent<ShootComponent>();
         //coreShoot.activateShoot = flag;
 
         // RightArm
-        ShootComponent rightArmShoot = rightArm.GetComponent<ShootComponent>();
-       // rightArmShoot.activateShoot = flag;
+        if (rightArm != null) {
+            ShootComponent rightArmShoot = rightArm.GetComponent<ShootComponent>();
+            // rightArmShoot.activateShoot = flag;
+        }
 
         // LeftArm
-        ShootComponent leftArmShoot = leftArm.GetComponent<ShootComponent>();
-        //leftArmShoot.activateShoot = flag;
+        if (leftArm != null) {
+            ShootComponent leftArmShoot = leftArm.GetComponent<ShootComponent>();
+            //leftArmShoot.activateShoot = flag;
+        }
     }
 
     private float getTotalHp() {
@@ -131,6 +141,8 @@ public class BossMachine : MonoBehaviour
             Stats leftArmHp = leftArm.GetComponent<Stats>();
             if (leftArmHp.isActiveAndEnabled) totalHp += leftArmHp.health;
         }
+
+
 
         return totalHp;
     }
@@ -349,19 +361,33 @@ public class BossMachine : MonoBehaviour
     }
 
     private void Start() {
-        hp = getTotalHp();
-        maxHp = getTotalHp();
+
+        coreStats = gameObject.GetComponent<Stats>();
+        lanternStats = rightArm.GetComponent<Stats>();
+        staffStats = leftArm.GetComponent<Stats>();
     }
 
     private void Update()
     {
         stateMachineControl();
-        
-        if (getTotalHp() != hp) {
-            hp = getTotalHp();
-            float hpPercent = hp / maxHp;
-            Debug.Log(hpPercent);
-            healthBar.value = hpPercent;
+        healthBar.value = coreStats.health / coreStats.maxHealth;
+
+        if (rightArm != null) {
+            lanternHealthBar.value = lanternStats.health / lanternStats.maxHealth;
+        }
+        else {
+            lanternHealthBar.value = 0;
+        }
+
+        if (leftArm != null) {
+            staffHealthBar.value = staffStats.health / staffStats.maxHealth;
+        }
+        else {
+            staffHealthBar.value = 0;
+        }
+
+        if (rightArm == null && leftArm == null && bossShield != null) {
+            Destroy(bossShield);
         }
     }
 }

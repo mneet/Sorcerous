@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ShootComponent : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class ShootComponent : MonoBehaviour
     
     public void SetBulletDirection(GameObject bullet) {
         if (!playerControlled) {
-            if (gameObject.GetComponent<MovementComponent>().fixedPosition) {
+            if (gameObject.GetComponent<MovementComponent>() != null && gameObject.GetComponent<MovementComponent>().fixedPosition) {
                 if (target != null) {
                     Vector3 direction = (target.transform.position - transform.position).normalized;
                     Quaternion rotation = Quaternion.LookRotation(direction, Vector3.up);
@@ -41,10 +42,16 @@ public class ShootComponent : MonoBehaviour
                 }
             }
             else {
-                Vector3 mobDirection = gameObject.GetComponent<MovementComponent>().GetVector3Direction();
-                bullet.GetComponent<Bullet>().direction = mobDirection;
-                Quaternion rotation = Quaternion.LookRotation(mobDirection, Vector3.up);
-                bullet.transform.rotation = rotation;
+                if (gameObject.GetComponent<MovementComponent>() != null) {
+                    Vector3 mobDirection = gameObject.GetComponent<MovementComponent>().GetVector3Direction();
+                    bullet.GetComponent<Bullet>().direction = mobDirection;
+                    Quaternion rotation = Quaternion.LookRotation(mobDirection, Vector3.up);
+                    bullet.transform.rotation = rotation;
+                } else {
+                    bullet.GetComponent<Bullet>().direction = transform.forward;
+                    Quaternion rotation = Quaternion.LookRotation(transform.forward, Vector3.up);
+                    bullet.transform.rotation = rotation;
+                }
             }
         }
         else {

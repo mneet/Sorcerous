@@ -20,6 +20,7 @@ public class HealthComponent : MonoBehaviour
                 GameManager.Instance.ScorePoint(1);
                 if (gameObject.GetComponent<ItemDrop>() != null) {
                     gameObject.GetComponent<ItemDrop>().DestroySelf();
+                    Debug.Log("destroying self");
                 }
                 else {
                     Destroy(gameObject);
