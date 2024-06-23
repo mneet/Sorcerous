@@ -19,9 +19,10 @@ public class WaveManager : MonoBehaviour
     private List<GameObject> formationMobList = new List<GameObject>();
     private List<GameObject> runnerMobList = new List<GameObject>();
 
-    private float timerStartDelayMax = 2f;
-    private float timerStartDelay = 2f;
-    private bool waveStartDelay = true;
+    [Header("Wave Timers")]
+    [SerializeField] private float timerStartDelayMax = 2f;
+    [SerializeField] private float timerStartDelay = 2f;
+    [SerializeField] private bool waveStartDelay = true;
 
     // Generation variables
     [SerializeField] private GameObject enemyPreFab;
@@ -350,6 +351,7 @@ public class WaveManager : MonoBehaviour
                 Debug.Log("Boss Wave");
                 currentRound = BossRound();
                 Perspective.Instance.SwitchPerspective(currentRound.perspective);
+                waveStartDelay = true;
             }
             else {
                 Debug.Log("Generating new Round");

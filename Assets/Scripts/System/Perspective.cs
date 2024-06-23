@@ -15,6 +15,7 @@ public class Perspective : MonoBehaviour
     public PerspectiveOptions perspective;
     private PerspectiveOptions activePerspective;
     private PerspectiveOptions lastPerspective;
+    private Queue<PerspectiveOptions> perspectiveQueue;
 
     // Screen Limits
     public float topDownWidthMin;
@@ -39,6 +40,10 @@ public class Perspective : MonoBehaviour
             Instance = this;
         }
         animator = GetComponent<Animator>();
+
+        perspectiveQueue = new Queue<PerspectiveOptions>();
+        perspectiveQueue.Enqueue(PerspectiveOptions.topDown);
+        perspectiveQueue.Enqueue(PerspectiveOptions.sideScroler);
     }
 
     private void SwitchState(PerspectiveOptions perspective) {
@@ -64,14 +69,9 @@ public class Perspective : MonoBehaviour
     }
     
     public PerspectiveOptions GetRandomPerspective() {
-        List<PerspectiveOptions> values = new List<PerspectiveOptions>();
-        values.Add(PerspectiveOptions.topDown);
-        values.Add(PerspectiveOptions.sideScroler);
 
-        if (values.Contains(lastPerspective)) {
-            values.Remove(lastPerspective);
-        }
-        PerspectiveOptions randomPerspective = values[Mathf.Max(UnityEngine.Random.Range(0, values.Count - 1), 0)];
+        PerspectiveOptions randomPerspective = perspectiveQueue.Dequeue();
+        perspectiveQueue.Enqueue(randomPerspective);
 
         return randomPerspective;
     }
@@ -89,4 +89,5 @@ public class Perspective : MonoBehaviour
         //DebugSwitchPerspective();
         if (activePerspective != perspective) SwitchState(perspective);
     }
+
 }
