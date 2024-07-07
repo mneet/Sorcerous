@@ -7,6 +7,7 @@ public class ShootComponent : MonoBehaviour
 {
     [SerializeField] bool playerControlled = false;
     [SerializeField] private GameObject bulletPreFab;
+    [SerializeField] private List<Transform> bulletPivots;
     private GameObject target;
     private Stats stats;
 
@@ -17,6 +18,10 @@ public class ShootComponent : MonoBehaviour
         if (fireCooldown <= 0f) {
             Vector3 position = transform.position;
             Quaternion rotation = transform.rotation;
+
+            if (bulletPivots.Count > 0) {
+                position = bulletPivots[Random.Range(0, bulletPivots.Count - 1)].position;
+            }
 
             GameObject bullet = Instantiate(bulletPreFab, position, rotation);
             bullet.GetComponent<Bullet>().parent = gameObject;

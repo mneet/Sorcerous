@@ -50,10 +50,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   maxHealth: 1
   health: 1
-  armor: 1
-  movementSpeed: 10
+  armor: 5
+  movementSpeed: 13
   bulletDamage: 0
   fireRate: 0
   bulletLevel: 0

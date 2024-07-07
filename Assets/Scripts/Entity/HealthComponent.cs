@@ -8,10 +8,11 @@ public class HealthComponent : MonoBehaviour
 
     private Stats stats;
     private bool isPlayer;
+    private bool colisionFlag = false;
 
     // Apply damage to entity
     public void TakeDamage(float damage) {
-        stats.health -= damage;
+        stats.health -= damage * (1.0f - (stats.armor / 100));
 
         if (isPlayer) GameManager.Instance.UpdateHealthUI(stats.health / stats.maxHealth);
      
@@ -41,6 +42,22 @@ public class HealthComponent : MonoBehaviour
     private void DestroySelfEnemy() {
         WaveManager.Instance.MobDestroyed(gameObject);
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (!other.gameObject.CompareTag(tag) && (!isPlayer && other.gameObject.CompareTag("Player")) && !colisionFlag) {
+            HealthComponent health = other.GetComponent<HealthComponent>();
+            if (health != null) {
+                health.TakeDamage(stats.bulletDamage);
+            }
+            colisionFlag = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.gameObject.CompareTag("Player")) {
+            colisionFlag = false;
+        }
     }
 
     // Setup Health Component variables

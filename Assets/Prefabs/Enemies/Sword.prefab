@@ -51,10 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   maxHealth: 1
   health: 1
-  armor: 0
-  movementSpeed: 10
+  armor: 3
+  movementSpeed: 12
   bulletDamage: 0.4
   fireRate: 1.7
   bulletLevel: 0
@@ -156,13 +157,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5693584590536158883}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 22c89c28f3af8e74aa3f32f1a09d9399, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
+  bulletPivots: []
   bulletLevel: 0
 --- !u!1001 &5746710035691433640
 PrefabInstance:

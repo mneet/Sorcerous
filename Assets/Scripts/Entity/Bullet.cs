@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Perspective;
 
 public class Bullet : MonoBehaviour
 {
@@ -32,6 +33,18 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.position += (direction * speed) * Time.deltaTime;
+        Vector3 movDir = transform.position;
+        switch (Perspective.Instance.perspective) {
+
+            case PerspectiveOptions.topDown:
+                movDir.y = 0;
+                break;
+
+            case PerspectiveOptions.sideScroler:
+                movDir.x = 0;
+                break;
+        }
+        transform.position = Vector3.MoveTowards(transform.position, movDir, (speed * Time.deltaTime));
         CheckOutOfScreen();
     }
 

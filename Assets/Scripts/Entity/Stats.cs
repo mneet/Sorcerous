@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Stats : MonoBehaviour
 {
+    public bool isPlayer = false;
     public float maxHealth;
     public float health;
     public float armor;
@@ -16,6 +17,17 @@ public class Stats : MonoBehaviour
 
     private void Awake() {
         health = maxHealth;
+    }
+
+    private void Start() {
+        if (!isPlayer) {
+            float modifier = WaveManager.Instance.progressionModifier[WaveManager.Instance.progressionLevel];
+            health *= modifier;
+            maxHealth *= modifier;
+            movementSpeed *= modifier;
+            bulletDamage *= modifier;
+            fireRate /= modifier;
+        }
     }
 
     public void UpgradeFire() {

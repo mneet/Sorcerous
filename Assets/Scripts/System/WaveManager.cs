@@ -23,8 +23,17 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private float timerStartDelayMax = 2f;
     [SerializeField] private float timerStartDelay = 2f;
     [SerializeField] private bool waveStartDelay = true;
+    public List<float> progressionModifier;
+    public int progressionLevel;
+    [SerializeField] private List<int> progressionWaveAmountMin;
+    [SerializeField] private List<int> progressionWaveAmountMax;
+    [SerializeField] private List<int> progressionWaves;
+
+    private bool callUpgrade = false;
+    private bool callUpgradeIgnore = true;
 
     // Generation variables
+
     [SerializeField] private GameObject enemyPreFab;
     [SerializeField] private GameObject bossPrefab;
     [SerializeField] private List<GameObject> TopDownFixedMob;
@@ -105,17 +114,22 @@ public class WaveManager : MonoBehaviour
     #endregion
 
     #region Generation Methods
+
+    private int WaveMobAmount() {
+        int amount = UnityEngine.Random.Range(progressionWaveAmountMin[progressionLevel], progressionWaveAmountMax[progressionLevel]);
+        return amount;
+    }
     // Generates a new Round
     private Round RoundGenerator() {
         Round newRound = new Round();
         newRound.perspective = Perspective.Instance.GetRandomPerspective();
         newRound.InitVariables();
 
-        for (var i = 0; i < UnityEngine.Random.Range(1,5); i++) {
+        for (var i = 0; i < progressionWaves[progressionLevel]; i++) {
             newRound.formationWaves.Add(FormationWaveGenerator(newRound));
         }
 
-        for (var i = 0; i < UnityEngine.Random.Range(1, 5); i++) {
+        for (var i = 0; i < progressionWaves[progressionLevel]; i++) {
             newRound.runnerWaves.Add(RunnerWaveGenerator(newRound));
         }
 
@@ -131,7 +145,10 @@ public class WaveManager : MonoBehaviour
         float xOrigin = spawnArea.centerAnchorX;
         float yOrigin = spawnArea.centerAnchorY;
 
-        for (var i = 0; i < UnityEngine.Random.Range(2, 4); i++) {
+        int formationAmount = WaveMobAmount();
+        formationAmount = Mathf.Clamp(formationAmount, 1, 3);
+
+        for (var i = 0; i < formationAmount; i++) {
             float mobX = 0;
             float mobY = 0;
             float lineDivision = 0f;
@@ -199,7 +216,7 @@ public class WaveManager : MonoBehaviour
                 break;
         }
 
-        for (var i = 0; i < UnityEngine.Random.Range(1, 3); i++) {
+        for (var i = 0; i < WaveMobAmount(); i++) {
             float mobX = UnityEngine.Random.Range(xMin, xMax);
             float mobY = UnityEngine.Random.Range(yMin, yMax);
 
@@ -324,19 +341,23 @@ public class WaveManager : MonoBehaviour
         }
         return mobList;
     }
-
     // Call SpawnWave for Formation and Runner Waves
     private void RoundManager() {
 
+        if (callUpgrade && timerStartDelay <= timerStartDelayMax / 2) {
+            GameManager.Instance.callUpgrade();
+            callUpgrade = false;
+        }
+
         if (!waveStartDelay) {
-                if (!formationWaveSpawned && currentRound.formationWaveFlag && currentRound.formationWaves.Count > 0) {
-                    formationMobList = SpawnWave(currentRound.formationWaves[currentRound.formationWaveInd], true);
-                    formationWaveSpawned = true;
-                }
-                if (!runnerWaveSpawned && currentRound.runnerWaveFlag && currentRound.runnerWaves.Count > 0) {
-                    runnerMobList = SpawnWave(currentRound.runnerWaves[currentRound.runnerWaveInd], false);
-                    runnerWaveSpawned = true;
-                }
+            if (!formationWaveSpawned && currentRound.formationWaveFlag && currentRound.formationWaves.Count > 0) {
+                formationMobList = SpawnWave(currentRound.formationWaves[currentRound.formationWaveInd], true);
+                formationWaveSpawned = true;
+            }
+            if (!runnerWaveSpawned && currentRound.runnerWaveFlag && currentRound.runnerWaves.Count > 0) {
+                runnerMobList = SpawnWave(currentRound.runnerWaves[currentRound.runnerWaveInd], false);
+                runnerWaveSpawned = true;
+            }
         }
         else {
             timerStartDelay -= Time.deltaTime;
@@ -352,12 +373,18 @@ public class WaveManager : MonoBehaviour
                 currentRound = BossRound();
                 Perspective.Instance.SwitchPerspective(currentRound.perspective);
                 waveStartDelay = true;
+                callUpgrade = true; 
             }
             else {
                 Debug.Log("Generating new Round");
                 currentRound = RoundGenerator();
                 Perspective.Instance.SwitchPerspective(currentRound.perspective);
                 waveStartDelay = true;
+                callUpgrade = true;
+
+                if (waveCount % 3 == 0) {
+                    progressionLevel++;
+                }
             }
 
             if (!currentRound.roundFlag) {

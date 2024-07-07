@@ -19,7 +19,7 @@ public class ItemDrop : MonoBehaviour
             int dice = Random.Range(0, 100);
             if (dice > 50) {
                 Debug.Log("Powerup");
-                Instantiate(healPwrup, transform.position, Quaternion.identity);
+               // Instantiate(healPwrup, transform.position, Quaternion.identity);
             }
         }
     }

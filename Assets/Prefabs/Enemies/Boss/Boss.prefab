@@ -514,11 +514,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  health: 5
+  isPlayer: 0
+  maxHealth: 25
+  health: 25
   armor: 0
   movementSpeed: 0
-  bulletDamage: 1
+  bulletDamage: 0.9
   fireRate: 1
   bulletLevel: 0
 --- !u!114 &3019179912054342644
@@ -548,6 +549,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
+  bulletPivots: []
   bulletLevel: 0
 --- !u!65 &8274540571653754434
 BoxCollider:
@@ -774,6 +776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   maxHealth: 10000
   health: 0
   armor: 0
@@ -1138,12 +1141,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
+  isPlayer: 0
+  maxHealth: 20
   health: 5
   armor: 0
   movementSpeed: 0
   bulletDamage: 1
-  fireRate: 1
+  fireRate: 0.7
   bulletLevel: 0
 --- !u!114 &4082419136427673671
 MonoBehaviour:
@@ -1204,6 +1208,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
+  bulletPivots: []
   bulletLevel: 0
 --- !u!54 &5750808048365660683
 Rigidbody:
@@ -1615,12 +1620,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 5
-  health: 5
+  isPlayer: 0
+  maxHealth: 25
+  health: 25
   armor: 0
   movementSpeed: 0
-  bulletDamage: 1
-  fireRate: 1
+  bulletDamage: 0.7
+  fireRate: 1.2
   bulletLevel: 0
 --- !u!114 &747844837939806482
 MonoBehaviour:
@@ -1649,6 +1655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
+  bulletPivots: []
   bulletLevel: 0
 --- !u!54 &3882805262000157423
 Rigidbody:

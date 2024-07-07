@@ -51,12 +51,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429488f4e0410419d167aabf529c86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPlayer: 0
   maxHealth: 1
   health: 1
   armor: 0
   movementSpeed: 10
-  bulletDamage: 1
-  fireRate: 1
+  bulletDamage: 0.1
+  fireRate: 1.5
   bulletLevel: 0
 --- !u!114 &701077341704920197
 MonoBehaviour:
@@ -87,6 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerControlled: 0
   bulletPreFab: {fileID: 3265343305577063921, guid: b51c93a0a03b4fc4699caa9b1cac9a2d, type: 3}
+  bulletPivots: []
   bulletLevel: 0
 --- !u!114 &4374246470205920090
 MonoBehaviour:
