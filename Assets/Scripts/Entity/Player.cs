@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 {
     // Attributes
     public float movementSpeed = 10f;
+    private Stats stats;
 
     [SerializeField] private GameObject bulletPreFab;
 
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
     private void Awake() {
 
         playerInput = gameObject.GetComponent<PlayerInput>();
+        stats = gameObject.GetComponent<Stats>();
     }
 
     #region Player Movement
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour
                 break;
         }
 
-        transform.position += movDir * movementSpeed * Time.deltaTime;
+        transform.position += movDir * stats.movementSpeed * Time.deltaTime;
         LimitPlayerMovement();
         MoveToCenter();
     }
@@ -87,6 +89,7 @@ public class Player : MonoBehaviour
     }
     #endregion
 
+
     // Update is called once per frame
     void Update()
     {
@@ -94,5 +97,9 @@ public class Player : MonoBehaviour
         else transform.rotation = Quaternion.identity;
 
         HandleMovement();  
+
+        if (Input.GetKeyDown(KeyCode.F3)) {
+            gameObject.GetComponent<HealthComponent>().immortal = true;
+        }
     }
 }

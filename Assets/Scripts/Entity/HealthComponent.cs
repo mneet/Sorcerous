@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
-    [SerializeField] private bool immortal = false;
+    public bool immortal = false;
 
     private Stats stats;
     private bool isPlayer;
@@ -14,7 +14,7 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(float damage) {
         stats.health -= damage * (1.0f - (stats.armor / 100));
 
-        if (isPlayer) GameManager.Instance.UpdateHealthUI(stats.health / stats.maxHealth);
+        if (isPlayer) GameManager.Instance.UpdateHealthUI(stats.health / stats.maxHealth, immortal);
      
         if (stats.health <= 0 && !immortal) {
             if (!isPlayer) {
@@ -36,7 +36,8 @@ public class HealthComponent : MonoBehaviour
     // Apply heal to entity
     public void TakeHeal(float heal) {
         stats.health += heal;
-        if (isPlayer) GameManager.Instance.UpdateHealthUI((int)stats.health);
+        stats.health = Mathf.Clamp(stats.health, 0, stats.maxHealth);
+        if (isPlayer) GameManager.Instance.UpdateHealthUI(stats.health / stats.maxHealth);
     }
 
     private void DestroySelfEnemy() {

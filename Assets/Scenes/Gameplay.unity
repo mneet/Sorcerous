@@ -4427,6 +4427,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5af10bd573b2da4a96fe5fd87a252e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  formationMobList: []
+  runnerMobList: []
   timerStartDelayMax: 3
   timerStartDelay: 3
   waveStartDelay: 1
@@ -4438,18 +4440,20 @@ MonoBehaviour:
   - 1.8
   progressionLevel: 0
   progressionWaveAmountMin: 0200000002000000030000000300000005000000
-  progressionWaveAmountMax: 030000000400000005000000080000000a000000
+  progressionWaveAmountMax: 0300000004000000050000000600000007000000
   progressionWaves: 0200000004000000060000000800000009000000
   enemyPreFab: {fileID: 2711517753622614249, guid: c279f6b47b66d9c41901d70bf6ac6f25, type: 3}
   bossPrefab: {fileID: 3904607650729984070, guid: 7c610b5849276c541bab04b66b781c0c, type: 3}
   TopDownFixedMob:
   - {fileID: 2711517753622614249, guid: c279f6b47b66d9c41901d70bf6ac6f25, type: 3}
   - {fileID: 138373521777603825, guid: 2470c88480f4f9d4a936d345f1745c34, type: 3}
+  - {fileID: 6566408296527127892, guid: f24a11068e5778b43a5766c980a3a5b9, type: 3}
   TopDownMoveMob:
   - {fileID: 8524085296173237158, guid: 3af86308830cf4f49903d99d87c8eae7, type: 3}
   SideScrollFixedMob:
   - {fileID: 1319080319440742131, guid: 1ca8b24057106a44fb81a47248b70d3e, type: 3}
   - {fileID: 6566408296527127892, guid: 40fe430e5fe047b45945196a3db01eb7, type: 3}
+  - {fileID: 6566408296527127892, guid: f24a11068e5778b43a5766c980a3a5b9, type: 3}
   SideScrollMoveMob:
   - {fileID: 5693584590536158883, guid: 49caa08ba8dc4ca4db308e1c5835f002, type: 3}
   waveCount: 0
@@ -4504,6 +4508,7 @@ MonoBehaviour:
   score: {fileID: 917076568}
   waveCounter: {fileID: 1828799013}
   hpBar: {fileID: 435710703}
+  endgame: 0
   hud: {fileID: 804409777}
   endGamePanel: {fileID: 165015971}
   scoreValueRun: {fileID: 978260936}

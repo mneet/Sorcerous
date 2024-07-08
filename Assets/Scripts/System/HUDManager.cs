@@ -13,7 +13,7 @@ public class HUDManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI score;
     [SerializeField] private TextMeshProUGUI waveCounter;
     [SerializeField] private Slider hpBar;
-
+    public bool endgame = false;
     [SerializeField] private GameObject hud;
 
     [Header("ENDGAME")]
@@ -59,6 +59,7 @@ public class HUDManager : MonoBehaviour
         waveValueRecord.text = ValueData.Instance.waveRecord.ToString();
         bossValueRecord.text = ValueData.Instance.bossRecord.ToString();
 
+        endgame = true;
     }
 
     public void ActivateVictory() {

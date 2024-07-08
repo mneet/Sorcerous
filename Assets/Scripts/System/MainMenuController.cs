@@ -6,14 +6,17 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour {
     [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject helpMenu;
+    [SerializeField] private GameObject creditMenu;
     [SerializeField] private GameObject mainMenu;
+
+    private bool credit = false;
+    private bool help = false;
     private bool pause = false;
     private void Start() {
         AudioController.Instance.TocarBGMusic(0);
     }
-    public void AbrirConfiguracoes() {
 
-    }
     public void CarregarCena(int idCena) {
         SceneManager.LoadScene(idCena);
         AudioController.Instance.TocarBGMusic(1);
@@ -33,7 +36,19 @@ public class MainMenuController : MonoBehaviour {
         }
     }
 
+    public void HelpMenu(bool active) {
+        helpMenu.SetActive(active);
+        mainMenu.SetActive(!active);
+    }
 
+    public void CreditMenu(bool active) {
+        creditMenu.SetActive(active);
+        mainMenu.SetActive(!active);
+    }
+
+    public void ExitGame() {
+        Application.Quit();
+    }
     //DEBUG
     private void ScreenShoot() {
         if (Input.GetKeyDown(KeyCode.Space)) {

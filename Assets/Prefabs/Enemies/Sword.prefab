@@ -56,7 +56,7 @@ MonoBehaviour:
   health: 1
   armor: 3
   movementSpeed: 12
-  bulletDamage: 0.4
+  bulletDamage: 1
   fireRate: 1.7
   bulletLevel: 0
 --- !u!114 &5735600637951958869

@@ -16,8 +16,8 @@ public class WaveManager : MonoBehaviour
     private Round currentRound;
     private bool formationWaveSpawned = false;
     private bool runnerWaveSpawned = false;
-    private List<GameObject> formationMobList = new List<GameObject>();
-    private List<GameObject> runnerMobList = new List<GameObject>();
+    public List<GameObject> formationMobList = new List<GameObject>();
+    public List<GameObject> runnerMobList = new List<GameObject>();
 
     [Header("Wave Timers")]
     [SerializeField] private float timerStartDelayMax = 2f;
@@ -374,6 +374,7 @@ public class WaveManager : MonoBehaviour
                 Perspective.Instance.SwitchPerspective(currentRound.perspective);
                 waveStartDelay = true;
                 callUpgrade = true; 
+
             }
             else {
                 Debug.Log("Generating new Round");
@@ -381,10 +382,6 @@ public class WaveManager : MonoBehaviour
                 Perspective.Instance.SwitchPerspective(currentRound.perspective);
                 waveStartDelay = true;
                 callUpgrade = true;
-
-                if (waveCount % 3 == 0) {
-                    progressionLevel++;
-                }
             }
 
             if (!currentRound.roundFlag) {
@@ -392,6 +389,11 @@ public class WaveManager : MonoBehaviour
                 waveCount += 1;
                 HUDManager.Instance.UpdateWave(waveCount);
                 currentRound.roundFlag = true;
+
+                if (waveCount % 3 == 0) {
+                    progressionLevel++;
+                    progressionLevel = Mathf.Clamp(progressionLevel, 0, 4);
+                }
             }
         }
     }

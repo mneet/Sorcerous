@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject upgradeMenu;
     public bool pause = false;
     public int score = 0;
-    [SerializeField] private int scoreWin = 200;
+    [SerializeField] private int scoreWin = 1000;
     private int screenshot = 0;
 
     public static GameManager Instance;
@@ -32,9 +32,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void UpdateHealthUI(float health) {
+    public void UpdateHealthUI(float health, bool immortal = false) {
         hudManager.UpdatePlayerHP(health);
-        if (health <= 0) {
+        if (health <= 0 && !immortal) {
             hudManager.ActivateDefeat();
             gameEnded = true;
             Time.timeScale = 0f;
@@ -70,8 +70,13 @@ public class GameManager : MonoBehaviour
     public void callUpgrade() {
         pause = !pause;
         if (pause) {
-            Time.timeScale = 0f;
-            upgradeMenu.SetActive(true);
+            UpgradeController upManager = upgradeMenu.GetComponent<UpgradeController>();
+            if (upManager.waterLevel < upManager.waterLevelMax || upManager.earthLevel < upManager.earthLevelMax ||
+                upManager.fireLevel < upManager.fireLevelMax || upManager.windLevel < upManager.windLevelMax) {
+                
+                Time.timeScale = 0f;
+                upgradeMenu.SetActive(true);
+            }
         }
         else {
             Time.timeScale = 1f;

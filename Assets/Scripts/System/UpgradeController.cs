@@ -17,15 +17,15 @@ public class UpgradeController : MonoBehaviour
 
     [SerializeField] private GameObject player;
 
-    [SerializeField] private int fireLevel = 0;
-    [SerializeField] private int waterLevel = 0;
-    [SerializeField] private int earthLevel = 0;
-    [SerializeField] private int windLevel = 0;
+    [SerializeField] public int fireLevel = 0;
+    [SerializeField] public int waterLevel = 0;
+    [SerializeField] public int earthLevel = 0;
+    [SerializeField] public int windLevel = 0;
 
-    [SerializeField] private int fireLevelMax = 3;
-    [SerializeField] private int waterLevelMax = 3;
-    [SerializeField] private int earthLevelMax = 3;
-    [SerializeField] private int windLevelMax = 3;
+    [SerializeField] public int fireLevelMax = 3;
+    [SerializeField] public int waterLevelMax = 3;
+    [SerializeField] public int earthLevelMax = 3;
+    [SerializeField] public int windLevelMax = 3;
 
     public void upgradeFire() {
         Stats playerStats = player.GetComponent<Stats>();
@@ -42,7 +42,8 @@ public class UpgradeController : MonoBehaviour
         HealthComponent playerHealthComponent = player.GetComponent<HealthComponent>();
 
         if (playerStats != null && waterLevel < waterLevelMax) {
-            playerHealthComponent.TakeHeal(playerStats.health += playerStats.maxHealth * 0.25f);
+            Debug.Log(playerStats.maxHealth * 0.25f);
+            playerHealthComponent.TakeHeal(playerStats.maxHealth * 0.25f);
             waterLevel++;
             returnToGame();
         }     
@@ -62,7 +63,7 @@ public class UpgradeController : MonoBehaviour
         Stats playerStats = player.GetComponent<Stats>();
 
         if (playerStats != null && windLevel < windLevelMax) {
-            earthLevel++;
+            windLevel++;
             playerStats.movementSpeed += playerStats.movementSpeed * 0.20f;
             returnToGame();
         }
@@ -73,10 +74,10 @@ public class UpgradeController : MonoBehaviour
             fireButtonText.text = "NÍVEL MÁXIMO ALCANÇADO";
         }
         if (earthLevel >= earthLevelMax) {
-            fireButtonText.text = "NÍVEL MÁXIMO ALCANÇADO";
+            earthButtonText.text = "NÍVEL MÁXIMO ALCANÇADO";
         }
         if (windLevel >= windLevelMax) {
-            fireButtonText.text = "NÍVEL MÁXIMO ALCANÇADO";
+            windButtonText.text = "NÍVEL MÁXIMO ALCANÇADO";
         }
         if (waterLevel >= waterLevelMax) {
             waterButtonText.text = "ESGOTADO";

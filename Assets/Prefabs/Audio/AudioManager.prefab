@@ -48,7 +48,7 @@ MonoBehaviour:
   _sfxSrc: {fileID: 0}
   _bgMusics:
   - {fileID: 8300000, guid: 778ccdc8d36cddc419ad8c866cce9fa7, type: 3}
-  - {fileID: 8300000, guid: fba5f347c38c75645847d6b357f5f64c, type: 3}
+  - {fileID: 8300000, guid: be39b78e60ec9cd4b96bc4a787ea924b, type: 3}
   _sfxClips:
   - {fileID: 8300000, guid: 43658caf54f08904b8d29b2c11299f7b, type: 3}
   - {fileID: 8300000, guid: 011145b6733c15045a3caf057bfff868, type: 3}

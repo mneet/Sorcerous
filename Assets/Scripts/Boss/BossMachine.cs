@@ -25,6 +25,7 @@ public class BossMachine : MonoBehaviour
     private float healSpawnTimerMax;
     private float stateTimerMax;
 
+    [SerializeField] private GameObject hud;
     [SerializeField] private Slider healthBar;
     [SerializeField] private Slider lanternHealthBar;
     [SerializeField] private Slider staffHealthBar;
@@ -197,9 +198,9 @@ public class BossMachine : MonoBehaviour
             healSpawnTimer -= Time.deltaTime;
             if (healSpawnTimer <= 0) {
                 healSpawnTimer = healSpawnTimerMax;
-                //Vector3 spawnPos = new Vector3(UnityEngine.Random.Range(minX, maxX), 0f, UnityEngine.Random.Range(-8f, -7.7f));
-                //GameObject mob = Instantiate(healerMob, spawnPos, Quaternion.identity);
-                //mob.GetComponent<HealEnemy>().boss = gameObject;
+                GameObject mob = Instantiate(healerMob, transform.position, Quaternion.identity);
+                WaveManager.Instance.formationMobList.Add(mob);
+                mob.GetComponent<ItemDrop>().spawner = WaveManager.Instance.gameObject;
             }
 
             // Condição de troca de estado
@@ -226,6 +227,11 @@ public class BossMachine : MonoBehaviour
             defaultRotation();
             // Aplicando movimento
             transform.position += moveDirVec * (movementSpeed / 2) * Time.deltaTime;
+
+            Vector3 clampVector = transform.position;
+            clampVector.x = Mathf.Clamp(clampVector.x, minX, maxX);
+            clampVector.z = Mathf.Clamp(clampVector.z, minZ, maxZ);
+            transform.position = clampVector;
 
             if (transform.position.x >= maxX || transform.position.x <= minX) {
                 moveDirVec.x *= -1;
@@ -388,6 +394,10 @@ public class BossMachine : MonoBehaviour
 
         if (rightArm == null && leftArm == null && bossShield != null) {
             Destroy(bossShield);
+        }
+
+        if (GameManager.Instance.gameEnded) {
+            hud.SetActive(false);
         }
     }
 }

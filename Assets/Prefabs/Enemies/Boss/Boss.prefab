@@ -515,8 +515,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  maxHealth: 25
-  health: 25
+  maxHealth: 15
+  health: 15
   armor: 0
   movementSpeed: 0
   bulletDamage: 0.9
@@ -570,8 +570,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.5451732, y: 5.2349725, z: 1}
-  m_Center: {x: -0.1740592, y: -2.1174862, z: 0.0000004785701}
+  m_Size: {x: 3.5451732, y: 5.2349725, z: 4.1393733}
+  m_Center: {x: -0.17405915, y: -2.1174862, z: 1.5696871}
 --- !u!54 &3825722731754453380
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1142,8 +1142,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  maxHealth: 20
-  health: 5
+  maxHealth: 12
+  health: 12
   armor: 0
   movementSpeed: 0
   bulletDamage: 1
@@ -1176,7 +1176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   state: 0
   stateTimer: 10
-  healSpawnTimer: 1
+  healSpawnTimer: 3
+  hud: {fileID: 4484462451514912169}
   healthBar: {fileID: 2813229268089849488}
   lanternHealthBar: {fileID: 8096335078712475569}
   staffHealthBar: {fileID: 231673507543814020}
@@ -1193,7 +1194,7 @@ MonoBehaviour:
   rightArm: {fileID: 1748235434656589293}
   leftArm: {fileID: 5923002882275067965}
   bossShield: {fileID: 2401619745827727380}
-  healerMob: {fileID: 2711517753622614249, guid: c279f6b47b66d9c41901d70bf6ac6f25, type: 3}
+  healerMob: {fileID: 8524085296173237158, guid: 3af86308830cf4f49903d99d87c8eae7, type: 3}
 --- !u!114 &5056019441153129238
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1621,8 +1622,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPlayer: 0
-  maxHealth: 25
-  health: 25
+  maxHealth: 15
+  health: 15
   armor: 0
   movementSpeed: 0
   bulletDamage: 0.7
